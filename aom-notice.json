@@ -1,5 +1,11 @@
 {
   "notice": {
-    "page_num": "0"
+    "page_num": "3",    
+    "page_1_image": "http://ignite-game.github.io/school-notice-ad.png",
+    "page_1_text": "school notice ad",
+    "page_2_image": "http://ignite-game.github.io/xxx-notice-ad.png",
+    "page_2_text": "xxx notice ad",
+    "page_3_image": "http://ignite-game.github.io/xxx-2-notice-ad.png",
+    "page_3_text": "xxx 2 notice ad"
   }
 }
