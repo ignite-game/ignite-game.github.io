@@ -4,7 +4,7 @@
       "image": "http://ignite-game.github.io/school-notice-ad.png",
       "text": {
         "en": "(en) school notice ad",
-        "zh": "(zh) school notice ad",
+        "zh-cht": "(zh) school notice ad",
         "ja": "(ja) school notice ad",
         "ko": "(ko) school notice ad"
       }
@@ -13,7 +13,7 @@
       "image": "http://ignite-game.github.io/xxx-notice-ad.png",
       "text": {
         "en": "(en) xxx notice ad",
-        "zh": "(zh) xxx notice ad",
+        "zh-cht": "(zh) xxx notice ad",
         "ja": "(ja) xxx notice ad",
         "ko": "(ko) xxx notice ad"
       }
@@ -22,7 +22,7 @@
       "image": "http://ignite-game.github.io/xxx-2-notice-ad.png",
       "text": {
         "en": "(en) xxx 2 notice ad",
-        "zh": "(zh) xxx 2 notice ad",
+        "zh-cht": "(zh) xxx 2 notice ad",
         "ja": "(ja) xxx 2 notice ad",
         "ko": "(ko) xxx 2 notice ad"
       }
