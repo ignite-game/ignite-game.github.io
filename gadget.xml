@@ -2,6 +2,21 @@
 <Module>
   <ModulePrefs title=" Sample Game "></ModulePrefs>
   <Content type="html" view="canvas">
-    <![CDATA[ <div id="sample"></div><script type="text/javascript"> function init() {     document.getElementById("sample").innerHTML = " Sample Game "; } gadgets.util.registerOnLoadHandler(init); </script>   ]]>
+    <![CDATA[ 
+    <div id="sample"></div>
+    <script type="text/javascript">
+      function init() {     
+        document.getElementById("sample").innerHTML = " Sample Game "; 
+        
+        var params = {}; 
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED; 
+        gadgets.io.makeRequest("https ://preview.gamesparks.net/callback/E307152GZM4F/nutaku_test/E6qmexUFDizBz8XhJLuUgTejXTJR6MNs", function(obj) { }, params); 
+      } 
+      gadgets.util.registerOnLoadHandler(init); 
+    </script>   
+    ]]>
   </Content>
 </Module> 
