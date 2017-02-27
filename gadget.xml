@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Sample Application">
+    <Link rel="event.addapp" href="http://ignite-game.github.io/addapp" method="POST" />
+    <Link rel="event.suspendapp" href="http://ignite-game.github.io/suspendapp" method="GET" />
+    <Link rel="event.resumeapp" href="http://ignite-game.github.io/resumeapp" method="GET" />
+    <Link rel="event.removeapp" href="http://ignite-game.github.io/removeapp" method="GET" />
+  </ModulePrefs>
+  <Content view="html" type="url" href="http://ignite-game.github.io/index.html" />
+</Module> 
