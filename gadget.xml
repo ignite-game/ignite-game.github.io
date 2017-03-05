@@ -11,6 +11,15 @@
         function init() {
           document.getElementById("sample").innerHTML = "Nutaku Test";
           
+          // var params = {};
+          // params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+          // params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          // params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+          //params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          //gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
+        }
+
+        function requestPayment() {
           var itemParams = {};
           itemParams[opensocial.BillingItem.Field.SKU_ID] = 'XA123';
           itemParams[opensocial.BillingItem.Field.PRICE] = 100;
@@ -27,22 +36,17 @@
           opensocial.requestPayment(payment, function(response) { 
             if (response.hadError()) { 
               // error 
+              console.error('error when request payment');
             } else { 
               var payment = response.getData();
               var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
               // ... 
             } 
           });
-          
-          // var params = {};
-          // params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-          // params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-          // params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
-          //params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-          //gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
         }
         gadgets.util.registerOnLoadHandler(init);
       </script>
+      <button onclick="requestPayment()">Request Payment</button>
     ]]>
   </Content>
 </Module >
