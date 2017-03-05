@@ -1,18 +1,45 @@
 <Module>
   <ModulePrefs title= " Nutaku Test " />
+  <Require feature="opensocial-0.8" /> 
+  <Require feature="opensocial-payment" /> 
+  <Require feature="nutaku" /> 
+  <Link rel="payment.handler" href="http://aom18-server.herokuapp.com/api/payment/handle" />
   <Content type="html" view="canvas">
     <![CDATA[
       <div id="sample"></div>
       <script type="text/javascript">
         function init() {
           document.getElementById("sample").innerHTML = "Nutaku Test";
-
+          
+          var itemParams = {};
+          itemParams[opensocial.BillingItem.Field.SKU_ID] = 'XA123';
+          itemParams[opensocial.BillingItem.Field.PRICE] = 100;
+          itemParams[opensocial.BillingItem.Field.COUNT] = 2;
+          itemParams[opensocial.BillingItem.Field.DESCRIPTION] = "Description";
+          itemParams[nutaku.BillingItem.Field.NAME] = "Machine Gun";
+          // itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://example.com/item.gif";
+          
+          var item = opensocial.newBillingItem(itemParams); 
           var params = {};
-          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[opensocial.Payment.Field.ITEMS] = [item];
+          params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT; 
+          var payment = opensocial.newPayment(params); 
+          opensocial.requestPayment(payment, function(response) { 
+            if (response.hadError()) { 
+              // error 
+            } else { 
+              var payment = response.getData();
+              var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
+              // ... 
+            } 
+          });
+          
+          // var params = {};
+          // params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+          // params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           // params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
-          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-          gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
+          //params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          //gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
         }
         gadgets.util.registerOnLoadHandler(init);
       </script>
