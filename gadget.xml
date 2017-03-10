@@ -7,31 +7,74 @@
   </ModulePrefs>
   <Content type="html" view="canvas">
     <![CDATA[
-    	<link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/style.css">
+    <script type="text/javascript">
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+      }
+
+      function makeSignedRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
+      }
+
+      function requestPayment() {
+        var itemParams = {};
+        itemParams[opensocial.BillingItem.Field.SKU_ID] = 'XA123';
+        itemParams[opensocial.BillingItem.Field.PRICE] = 100;
+        itemParams[opensocial.BillingItem.Field.COUNT] = 2;
+        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = "Description";
+        itemParams[nutaku.BillingItem.Field.NAME] = "Machine Gun";
+        // itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://example.com/item.gif";
+        
+        var item = opensocial.newBillingItem(itemParams); 
+        var params = {};
+        params[opensocial.Payment.Field.ITEMS] = [item];
+        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT; 
+        var payment = opensocial.newPayment(params); 
+        opensocial.requestPayment(payment, function(response) { 
+          if (response.hadError()) { 
+            // error 
+            console.error('error when request payment');
+          } else { 
+            var payment = response.getData();
+            var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
+            // ... 
+          } 
+        });
+      }
+      gadgets.util.registerOnLoadHandler(init);
+    </script>
+    <button onclick="makeSignedRequest()">Make Signed Request</button>
+    <button onclick="requestPayment()">Request Payment</button>
+    <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/favicon.ico">
     <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/UnityProgress.js"></script>
-      <div class="template-wrap clear">
-      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
-      <br>
-      <div class="logo"></div>
-      <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);"></div>
-      <div class="title">aom2-unity</div>
-    <div style="background-color: rgb(34, 44, 54); position: absolute; overflow: hidden; top: 0px; left: 0px; width: 960px; height: 640px; display: none; background-position: initial initial; background-repeat: initial initial;"></div><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/Logo.Light.png" style="position: absolute; top: 69px; left: 34px; width: 892px; height: 502px; display: none;"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/ProgressFrame.Light.png" width="141" height="18" style="position: absolute; top: 581px; left: 409.5px; display: none;"><div style="position: absolute; overflow: hidden; top: 581px; left: 409.5px; width: 123.375px; height: 18px; display: none;"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/ProgressBar.Light.png" width="141" height="18" style="position: absolute; top: 0px; left: 0px;"></div><p style="position: absolute; top: 581px; left: 0px; width: 100%; text-align: center; display: none;"></p></div>
+    <div class="template-wrap clear">
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
+    <br>
+    <div class="logo"></div>
+    <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);"></div>
+    <div class="title">aom2-unity</div>
+    <div style="background-color: rgb(34, 44, 54); position: absolute; overflow: hidden; top: 0px; left: 0px; width: 1080px; height: 640px; display: none; background-position: initial initial; background-repeat: initial initial;"></div><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/Logo.Light.png" style="position: absolute; top: 69px; left: 34px; width: 892px; height: 502px; display: none;"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/ProgressFrame.Light.png" width="141" height="18" style="position: absolute; top: 581px; left: 409.5px; display: none;"><div style="position: absolute; overflow: hidden; top: 581px; left: 409.5px; width: 123.375px; height: 18px; display: none;"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/TemplateData/ProgressBar.Light.png" width="141" height="18" style="position: absolute; top: 0px; left: 0px;"></div><p style="position: absolute; top: 581px; left: 0px; width: 100%; text-align: center; display: none;"></p></div>
     <script type="text/javascript">
-  var Module = {
-    TOTAL_MEMORY: 268435456,
-    errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
-    compatibilitycheck: null,
-    backgroundColor: "#222C36",
-    splashStyle: "Light",
-    dataUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.data",
-    codeUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.js",
-    asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.asm.js",
-    memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.mem",
-  };
-</script>
-<script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/UnityLoader.js"></script>
-<script src="blob:https://s3-ap-southeast-1.amazonaws.com/648c8add-1d1e-4ee8-8f46-831b149ad67c"></script><script src="blob:https://s3-ap-southeast-1.amazonaws.com/e5e3d09d-099b-4586-8a28-87285d0e9ea0"></script>
+      var Module = {
+        TOTAL_MEMORY: 268435456,
+        errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+        compatibilitycheck: null,
+        backgroundColor: "#222C36",
+        splashStyle: "Light",
+        dataUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.data",
+        codeUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.js",
+        asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.asm.js",
+        memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/Nutaku-Web-Project.mem",
+      };
+    </script>
+    <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/Nutaku-Web-Project/Release/UnityLoader.js"></script>
+    <script src="blob:https://s3-ap-southeast-1.amazonaws.com/648c8add-1d1e-4ee8-8f46-831b149ad67c"></script><script src="blob:https://s3-ap-southeast-1.amazonaws.com/e5e3d09d-099b-4586-8a28-87285d0e9ea0"></script>
     ]]>
   </Content>
 </Module >
