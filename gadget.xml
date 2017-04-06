@@ -97,7 +97,7 @@
 
     </script>
 
-    <script src="Release/UnityLoader.js"></script>
+    <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/UnityLoader.js"></script>
 
 
     ]]>
