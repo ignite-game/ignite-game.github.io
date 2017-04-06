@@ -50,7 +50,7 @@
       function sendSaveRequest(key, object){
       	console.log("sendSaveRequet: "+key);
       	console.log(JSON.parse(object));
-      	var jsonObj = {id: 123456789, aa:JSON.parse(object)};
+      	var jsonObj = {id: 123456789, data:JSON.parse(object)};
       	console.log(jsonObj);
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
