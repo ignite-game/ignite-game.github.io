@@ -94,12 +94,11 @@
     
     		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.mem",
   
-    		};
+    	};
 
     </script>
 
     <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/UnityLoader.js"></script>
-
 
     
     ]]>
