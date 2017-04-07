@@ -40,8 +40,11 @@
             // error 
             console.error('error when request payment');
           } else { 
+          	console.log(response);
             var payment = response.getData();
-            var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
+            console.log(payment);
+            //var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
+            //console.log(payment);
             // ... 
           } 
         });
