@@ -56,6 +56,8 @@
       	var jsonObj = {id: 123456789};
       	jsonObj.data = dataObj;
       	console.log(jsonObj);
+      	console.log("-------------");
+      	console.log(gadgets.io.encodeValues(jsonObj));
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
