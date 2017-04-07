@@ -58,6 +58,7 @@
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
         	console.log("sendSaveRequest callback: "+key);
         	console.log(obj);
+        	SendMessage("aaaa", "bbbb");
         }, params);
       }
       
@@ -71,6 +72,7 @@
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/getByClass?class_name="+key+"&id=123456789", function(obj) {
         	console.log("sendGetRequest callback: "+key);
         	console.log(obj);
+        	SendMessage("aaaa", "bbbb");
         }, params);
       }
       
