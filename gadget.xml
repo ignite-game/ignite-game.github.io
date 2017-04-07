@@ -84,7 +84,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
     <button onclick="makeSignedRequest()">Make Signed Request</button>
-    <button onclick="requestPayment("{\"id\": 123, \"price\": 100, \"description\": \"description\", \"name\": \"name\"}")">Request Payment</button>
+    <button onclick="requestPayment("{\"id\": 123, \"price\": 100, \"description\": \"description\", \"name\": \"name\"}\")">Request Payment</button>
     
     <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/favicon.ico" />
