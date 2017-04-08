@@ -61,7 +61,11 @@
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
         	console.log("sendSaveRequest callback: "+key);
         	console.log(obj);
-        	//SendMessage("WebGLResponse", "setResponse");
+        	var responseObj = {"Text": obj.text, "Rc": obj.rc};
+        	var msg = {"Key" : key, "Ro" : responseObj}
+        	console.log(msg);
+        	console.log(JSON.stringify(msg));
+        	SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
         }, params);
       }
       
@@ -79,7 +83,7 @@
         	var msg = {"Key" : key, "Ro" : responseObj}
         	console.log(msg);
         	console.log(JSON.stringify(msg));
-        	SendMessage("WebGLResponse", "getResponse", JSON.stringify(msg));
+        	SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
         }, params);
       }
       
