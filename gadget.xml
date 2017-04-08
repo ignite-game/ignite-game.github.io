@@ -18,7 +18,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues('');
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/setByClass", function(obj) {}, params);
+        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/setByClass?class_name=Ignite.AOM2.CurrencyManager", function(obj) {}, params);
       }
 
       function requestPayment() {
