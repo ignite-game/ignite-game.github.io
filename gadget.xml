@@ -77,6 +77,8 @@
         	console.log(obj);
         	var responseObj = {"Text": obj.text, "Rc": obj.rc};
         	var msg = {"key" : key, "Ro" : responseObj}
+        	console.log(msg);
+        	console.log(JSON.stringify(msg));
         	SendMessage("WebGLResponse", "getResponse", JSON.stringify(msg));
         }, params);
       }
