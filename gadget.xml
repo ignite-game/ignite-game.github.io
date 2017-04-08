@@ -16,7 +16,7 @@
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues();
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
       }
