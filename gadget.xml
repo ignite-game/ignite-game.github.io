@@ -76,7 +76,7 @@
         	console.log("sendGetRequest callback: "+key);
         	console.log(obj);
         	var responseObj = {"Text": obj.text, "Rc": obj.rc};
-        	var msg = {"key" : key, "ResponseObj" : responseObj}
+        	var msg = {"key" : key, "Ro" : responseObj}
         	SendMessage("WebGLResponse", "getResponse", JSON.stringify(msg));
         }, params);
       }
