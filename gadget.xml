@@ -28,8 +28,8 @@
         itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.diamonds_500;
         itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
         itemParams[opensocial.BillingItem.Field.COUNT] = 1;
-        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = "ItemDesc";
-        itemParams[nutaku.BillingItem.Field.NAME] = "ItemName";
+        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
+        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
         // itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://example.com/item.gif";
         
         var item = opensocial.newBillingItem(itemParams); 
@@ -92,7 +92,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
     <button onclick="makeSignedRequest()">Make Signed Request</button>
-    <button onclick="requestPayment('{"Id":"diamonds_500","ItemName":"500 Gems","ItemDesc":"11% More Gems","Price":500.0}')">Request Payment</button>
+    <button onclick="requestPayment('{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}')">Request Payment</button>
     
     <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/favicon.ico" />
