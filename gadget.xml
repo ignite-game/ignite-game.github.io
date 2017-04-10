@@ -54,8 +54,10 @@
         	  var payment = response.getData();
             console.log(payment);
             var items = payment.getField('items');
+            console.log(items);
+            console.log(items.getField('skuId'));
            // console.log(items[0].JsonBillingItem.fields_);
-             console.log(items.JsonBillingItem.getField('skuId'));
+             console.log(items[0].getField('skuId'));
            //  console.log(items[0].getField('skuId'));
           } 
 
