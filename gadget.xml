@@ -69,7 +69,7 @@
             paymentJson.ItemName = items[0].fields_.name;
             paymentJson.ItemDesc = items[0].fields_.description;
             paymentJson.Price = items[0].fields_.Price;
-            paymentJson.responseMsg = payment.getField('responseCode');
+            paymentJson.ResponseMsg = payment.getField('responseCode');
             var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
           	var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
             console.log(msg);
