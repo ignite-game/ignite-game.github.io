@@ -53,7 +53,7 @@
             console.log("requestPayment callback");
         	  var payment = response.getData();
             console.log(payment);
-            var items = payment.getField(nutaku.Payment.Field.ITEMS);
+            var items = payment.getField('items');
             console.log(items);
           } 
 
