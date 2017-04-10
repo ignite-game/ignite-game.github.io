@@ -50,7 +50,7 @@
             //console.log(payment);
             //var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
 
-            console.log("requestPayment callback);
+            console.log("requestPayment callback");
         	  var payment = response.getData();
             console.log(payment);
             var items = payment.getField(nutaku.Payment.Field.ITEMS);
