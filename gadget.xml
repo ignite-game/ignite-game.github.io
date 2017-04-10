@@ -32,7 +32,6 @@
         itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
         // itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://example.com/item.gif";
-        console.log(itemParams);
         
         var item = opensocial.newBillingItem(itemParams); 
         var params = {};
@@ -43,14 +42,28 @@
           if (response.hadError()) { 
             // error 
             console.error('error when request payment');
+            console.error(response);
+             console.error(response.getData());
           } else { 
           	console.log(response);
             var payment = response.getData();
             console.log(payment);
             //var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
-            //console.log(payment);
-            // ... 
+
+            console.log("requestPayment callback: "+key);
+        	  var payment = response.getData();
+            console.log(payment);
           } 
+
+         // console.log("requestPayment callback: "+key);
+        //	console.log(obj);
+       // 	var responseObj = {"Text": obj.text, "Rc": obj.rc};
+       // 	var msg = {"Key" : key, "Ro" : responseObj}
+       // 	console.log(msg);
+       // 	console.log(JSON.stringify(msg));
+       // 	SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+
+
         });
       }
       
