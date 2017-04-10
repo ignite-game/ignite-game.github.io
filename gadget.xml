@@ -21,7 +21,8 @@
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
       }
 
-      function requestPayment(object) {
+      function requestPayment() {
+      var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';'
         var itemParams = {};
         var jsonObj = JSON.parse(object);
 
@@ -92,7 +93,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
     <button onclick="makeSignedRequest()">Make Signed Request</button>
-    <button onclick="requestPayment('{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}')">Request Payment</button>
+    <button onclick="requestPayment()">Request Payment</button>
     
     <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/favicon.ico" />
