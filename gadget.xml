@@ -22,7 +22,7 @@
       }
 
       function requestPayment() {
-      var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';'
+      var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
         var itemParams = {};
         var jsonObj = JSON.parse(object);
 
