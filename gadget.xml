@@ -21,8 +21,8 @@
         gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
       }
 
-      function requestPayment() {
-      var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
+      function requestPayment(object) {
+      //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
         var itemParams = {};
         var jsonObj = JSON.parse(object);
 
