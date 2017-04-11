@@ -1,12 +1,11 @@
 <Module>
   <ModulePrefs title= " Nutaku Test ">
-  	<Require feature="dynamic-height" />
     <Require feature="opensocial-0.8" /> 
     <Require feature="opensocial-payment" /> 
     <Require feature="nutaku" /> 
     <Link rel="payment.handler" href="http://aom18-server.herokuapp.com/api/payment/handle" />
   </ModulePrefs>
-  <Content type="html" view="canvas" preferred_width="960">
+  <Content type="html" view="canvas" preferred_width="960" preferred_width="640">
     <![CDATA[
     <script type="text/javascript">
       function init() {
@@ -118,7 +117,6 @@
       }
       
       gadgets.util.registerOnLoadHandler(init);
-      gadgets.window.adjustHeight();
     </script>
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
