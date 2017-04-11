@@ -1,11 +1,12 @@
 <Module>
   <ModulePrefs title= " Nutaku Test ">
+  	<Require feature="dynamic-height" />
     <Require feature="opensocial-0.8" /> 
     <Require feature="opensocial-payment" /> 
     <Require feature="nutaku" /> 
     <Link rel="payment.handler" href="http://aom18-server.herokuapp.com/api/payment/handle" />
   </ModulePrefs>
-  <Content type="html" view="canvas">
+  <Content type="html" view="canvas" preferred_width="960">
     <![CDATA[
     <script type="text/javascript">
       function init() {
