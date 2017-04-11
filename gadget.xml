@@ -118,6 +118,7 @@
       }
       
       gadgets.util.registerOnLoadHandler(init);
+      gadgets.window.adjustHeight();
     </script>
     <button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button>
