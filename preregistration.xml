@@ -52,8 +52,8 @@
 								var url = "http://aom18-server.herokuapp.com/api/nutakuUser/preRegistration";
 								gadgets.io.makeRequest(url, function(result) {
 									console.log(result.text);
-									console.log(result.text.data);
-									var resultData = result.text.data;
+									console.log(JSON.parse(result.text));
+									var resultData = JSON.parse(result.text).data;
 								console.log(resultData);
 										if (resultData == 'OK'){
 												document.getElementById('loading').style.display = 'none';
