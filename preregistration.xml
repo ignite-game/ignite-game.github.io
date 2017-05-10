@@ -47,7 +47,7 @@
                 				var params = {};
 								params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
 								params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-								params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: gadgets.json.stringify(object)});
+								params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: id, nickname: nickname});
 								params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
 								var url = "http://aom18-server.herokuapp.com/api/nutakuUser/preRegistration";
 								gadgets.io.makeRequest(url, function(result) {
