@@ -27,6 +27,24 @@
                         
                 function preReg(){
                 	gadgets.window.adjustHeight(816);
+                	var req = opensocial.newDataRequest(); 
+                	req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+                	req.send(function(response) { 
+                		if (response.hadError()) { 
+                			// error 
+                		} else { 
+                			var item = response.get("viewer"); 
+                			if (item.hadError()) {
+                				// error 
+                			} else { 
+                				var viewer = item.getData(); 
+                				var id = viewer.getId(); 
+                				var nickname = viewer.getDisplayName(); 
+                				console.log("id: "+id); 
+                				console.log("nickname: "+nickname); 
+                			} 
+                		} 
+                	});
 					var params = buildRequest(userData);
 					var url = HOST_INFO.API + "/user/preRegistration";
 					gadgets.io.makeRequest(url, function(result) {
