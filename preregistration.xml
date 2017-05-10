@@ -53,8 +53,6 @@
 								gadgets.io.makeRequest(url, function(result) {
 									var resultData = JSON.parse(result.text);
 										if (resultData == 'OK'){
-												document.getElementById('loading').style.display = 'none';
-												document.getElementById('everything').style.display = 'block';
 										}
 										else {
 												alert('We were unable to preregister you at this time. Please contact Customer Support.');
