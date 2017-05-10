@@ -22,13 +22,11 @@
         <script type="text/javascript">
                 function init() {
                 	gadgets.window.adjustHeight(816);
-					loadPerson();
 				}
 				gadgets.util.registerOnLoadHandler(init);
                         
                 function preReg(){
                 	gadgets.window.adjustHeight(816);
-					loadPerson();
 					var params = buildRequest(userData);
 					var url = HOST_INFO.API + "/user/preRegistration";
 					gadgets.io.makeRequest(url, function(result) {
