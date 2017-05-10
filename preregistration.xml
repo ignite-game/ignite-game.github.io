@@ -53,7 +53,7 @@
 								gadgets.io.makeRequest(url, function(result) {
 									console.log(result.text);
 									console.log(JSON.stringify(result.text));
-									var resultData = JSON.stringify(result.text).data;
+									var resultData = result.text.data;
 								console.log(resultData);
 										if (resultData == 'OK'){
 												document.getElementById('loading').style.display = 'none';
