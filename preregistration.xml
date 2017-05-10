@@ -45,6 +45,7 @@
                 			} 
                 		} 
                 	});
+                	/*
 					var params = buildRequest(userData);
 					var url = HOST_INFO.API + "/user/preRegistration";
 					gadgets.io.makeRequest(url, function(result) {
@@ -56,6 +57,7 @@
 									alert('We were unable to preregister you at this time. Please contact Customer Support.');
 							}
 					}, params);
+					*/
                 }
         </script>
         <button onclick="preReg()">button</button>
