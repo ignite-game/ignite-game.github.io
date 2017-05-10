@@ -51,6 +51,7 @@
 								params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
 								var url = "http://aom18-server.herokuapp.com/api/nutakuUser/preRegistration";
 								gadgets.io.makeRequest(url, function(result) {
+									console.log(result);
 									console.log(result.text);
 									var resultData = JSON.parse(result.text).data;
 										if (result.text == 'OK'){
