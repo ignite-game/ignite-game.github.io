@@ -19,7 +19,6 @@
     </ModulePrefs>
     <Content type="html" view="canvas" preferred_width="1020">
         <![CDATA[
-        <div onclick="javascript: preReg();">button</div>
         <script type="text/javascript">
                 function init() {
                 	gadgets.window.adjustHeight(<?php echo HEIGHT; ?>);
@@ -43,5 +42,6 @@
 					}, params);
                 }
         </script>
+        <div onclick="preReg()">button</div>
      ]]></Content>
 </Module>
