@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?php
+        define('BASEURL', sprintf('http://%s', htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES)));
+        define('DISPLAY_EVENT_TIMER', true);
+		define('GAME_CONFIG', realpath ( __DIR__ . '/../v1/App/Config/product/game.ini'));
+        $config = parse_ini_file(GAME_CONFIG, true);
+        define('CDN_URL', $config['CDN_URL']);
+        define('FLASH_URL', $config['FLASH_URL']);
+        define('WIDTH', 1020);
+        define('HEIGHT', 816);
+        ?>
+<Module>
+    <ModulePrefs title=" Flower Knight ">
+        <Require feature="flash"/>
+        <Require feature="dynamic-height"/>
+        <Require feature="opensocial-0.8"/>
+        <Require feature="opensocial-payment"/>
+        <Require feature="nutaku"/>
+		<Link rel="payment.handler" href="http://fkg-front.nutaku.net/api/v1/payment/savePayment" />
+    </ModulePrefs>
+    <Content type="html" view="canvas" preferred_width="<?php echo WIDTH;?>">
+        <![CDATA[
+        <script type="text/javascript" src="<?php echo BASEURL;?>/js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            // Host information
+            var HOST_INFO = {};
+            HOST_INFO.HOST     = "<?php echo BASEURL;?>";
+            HOST_INFO.TRACKING_ID = "";
+                        HOST_INFO.CDN = "<?php echo CDN_URL;?>";
+                        HOST_INFO.FLASH ="<?php echo FLASH_URL;?>";
+        </script>
+        <div id="loading" style="width: <?php echo WIDTH-2;?>px; height: <?php echo HEIGHT-2;?>px; border: 1px solid #ccd7dc; background: white url('<?php echo CDN_URL;?>/images/ajax-loader.gif') no-repeat center center; position: relative;">
+                <div style="position: absolute; bottom:300px; left: 0px; width: 1018px; text-align: center; color: #333; font-size: 16px;">Checking your preregistration status</div>
+        </div>
+        <div id="everything" style="display: none; width: <?php echo WIDTH-2;?>px; height: <?php echo HEIGHT-2;?>px; border: 1px solid #ccd7dc; background-color: white; position: relative;">
+                <div style="width: <?php echo WIDTH-2;?>px; height: 30px;">&nbsp;</div>
+                <object width="960" height="640" style="margin: 0px <?php echo( WIDTH-960)/2;?>px;">
+                        <param name="movie" value="<?php echo CDN_URL;?>/images/preregistration.swf">
+<!--                    <img src="<?php echo CDN_URL;?>/images/preregistration.png" width="960" height="640" alt="No Flash"> -->
+                        <embed width="960" height="640" wmode="opaque" type="application/x-shockwave-flash" quality="high" allowscriptaccess="always" src="<?php echo CDN_URL;?>/images/preregistration.swf"></embed>
+                </object>
+                <div style="width: <?php echo WIDTH-2;?>px; height: 30px;">&nbsp;</div>
+                <div class="share" style="margin: 0px <?php echo (WIDTH-774)/2; ?>px 30px <?php echo (WIDTH-774)/2; ?>px; width: 774px; height: 86px">
+                        <a href="#" data-service="facebook">
+                                <img src="http://www.nutaku.net/images/preregister/facebook.jpg" style="display: inline-block; width: 256px; height: 86px; float: left;">
+                        </a>
+                        <a href="#" data-service="twitter">
+                                <img src="http://www.nutaku.net/images/preregister/twitter.jpg" style="display: inline-block; width: 256px; height: 86px; float: left;"></a>
+                        <a href="#" data-service="googleplus">
+                                <img src="http://www.nutaku.net/images/preregister/googleplus.jpg" style="display: inline-block; width: 256px; height: 86px; float: left;">
+                        </a>
+                </div>
+        </div>
+        <script type="text/javascript" src="<?php echo BASEURL;?>/js/common.js"></script>
+        <script type="text/javascript" src="<?php echo BASEURL;?>/js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo BASEURL;?>/js/jquery.cookie.js"></script>
+        <script type="text/javascript">
+                function init() {
+                                gadgets.window.adjustHeight(<?php echo HEIGHT; ?>);
+                                loadPerson();
+                                var params = buildRequest(userData);
+                                var url = HOST_INFO.API + "/user/preRegistration";
+                                gadgets.io.makeRequest(url, function(result) {
+                                        if (result.data == 'OK'){
+                                                document.getElementById('loading').style.display = 'none';
+                                                document.getElementById('everything').style.display = 'block';
+                                        }
+                                        else {
+                                                alert('We were unable to preregister you at this time. Please contact Customer Support.');
+                                        }
+                                }, params);
+                        }
+
+                        gadgets.util.registerOnLoadHandler(init);
+
+$(function() {
+    $(".share a").on("click", function(){
+      var url =  'http://www.nutaku.net/games/flower-knight-girl/pre-register/',
+          social = $(this).data("service"),
+          service_link = '';
+      if(social == 'facebook') {
+        service_link = 'http://www.facebook.com/sharer/sharer.php?u=';
+      } else if(social == 'twitter') {
+        service_link = 'http://twitter.com/intent/tweet?status=';
+      } else if(social == 'googleplus') {
+        service_link = 'https://plus.google.com/share?url=';
+      }
+      window.open(service_link+url,'_blank',"width=600,height=400");
+    })
+});
+        </script>
+     ]]></Content>
+</Module>
