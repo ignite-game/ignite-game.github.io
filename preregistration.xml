@@ -53,8 +53,8 @@
 								gadgets.io.makeRequest(url, function(result) {
 									console.log(result);
 									console.log(result.text);
-									var resultData = JSON.parse(result.text).data;
-										if (result.text == 'OK'){
+									var resultData = JSON.parse(result.text);
+										if (resultData == 'OK'){
 												document.getElementById('loading').style.display = 'none';
 												document.getElementById('everything').style.display = 'block';
 										}
