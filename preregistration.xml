@@ -21,7 +21,7 @@
         <![CDATA[
         <script type="text/javascript">
                 function init() {
-                	gadgets.window.adjustHeight(<?php echo HEIGHT; ?>);
+                	gadgets.window.adjustHeight(816);
 					loadPerson();
 				}
 				gadgets.util.registerOnLoadHandler(init);
@@ -42,6 +42,6 @@
 					}, params);
                 }
         </script>
-        <div onclick="preReg()">button</div>
+        <button onclick="preReg()">button</button>
      ]]></Content>
 </Module>
