@@ -1,0 +1,166 @@
+<Module>
+  <ModulePrefs title= " Nutaku Test ">
+    <Require feature="opensocial-0.8" /> 
+    <Require feature="opensocial-payment" /> 
+    <Require feature="nutaku" /> 
+    <Link rel="payment.handler" href="http://aom18-server.herokuapp.com/api/payment/handle" />
+  </ModulePrefs>
+  <Content type="html" view="canvas" preferred_width="960" preferred_height="640">
+    <![CDATA[
+    <script type="text/javascript">
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+      }
+      
+      function makeSignedRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/payment/handle", function(obj) {}, params);
+      }
+
+      function requestPayment(object) {
+      //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
+        var itemParams = {};
+        var jsonObj = JSON.parse(object);
+
+        itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
+        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
+        itemParams[opensocial.BillingItem.Field.COUNT] = 1;
+        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
+        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
+        // itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://example.com/item.gif";
+        
+        var item = opensocial.newBillingItem(itemParams); 
+        var params = {};
+        params[opensocial.Payment.Field.ITEMS] = [item];
+        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT; 
+        var payment = opensocial.newPayment(params); 
+        opensocial.requestPayment(payment, function(response) { 
+          if (response.hadError()) { 
+            // error 
+            console.error('error when request payment');
+           // console.error(response);
+           //  console.error(response.getData());
+            var errorJson = {}
+            errorJson.errorCode = response.getErrorCode();
+            errorJson.errorMessage = response.getErrorMessage();
+            var responseObj = {"Text": JSON.stringify(errorJson) , "Rc": 200};
+          	var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
+            console.log(msg);
+            console.log(JSON.stringify(msg));
+            SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
+          } else { 
+          	//console.log(response);
+            //var payment = response.getData();
+            //console.log(payment);
+            //var paymentId = payment.getField(nutaku.Payment.Field.PAYMENT_ID);
+
+            console.log("requestPayment callback: success");
+        	  var payment = response.getData();
+            console.log(payment);
+            var items = payment.getField('items');
+            console.log(items);
+            console.log(items[0].fields_);
+            var paymentJson = {};
+            paymentJson.Id = items[0].fields_.skuId;
+            paymentJson.ItemName = items[0].fields_.name;
+            paymentJson.ItemDesc = items[0].fields_.description;
+            paymentJson.Price = items[0].fields_.price;
+            paymentJson.ResponseMsg = payment.getField('responseCode');
+            var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
+          	var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
+            console.log(msg);
+            console.log(JSON.stringify(msg));
+            SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
+          } 
+        });
+      }
+      
+      function sendSaveRequest(key, object){
+      	console.log("sendSaveRequet: "+key);
+      	console.log(object);
+      	var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
+        	console.log("sendSaveRequest callback: "+key);
+        	console.log(obj);
+        	var responseObj = {"Text": obj.text, "Rc": obj.rc};
+        	var msg = {"Key" : key, "Ro" : responseObj}
+        	console.log(msg);
+        	console.log(JSON.stringify(msg));
+        	SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+        }, params);
+      }
+      
+      function sendGetRequest(key){
+      	console.log("sendGetRequet: "+key);
+      	var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("http://aom18-server.herokuapp.com/api/route/getByClass?class_name="+key, function(obj) {
+        	console.log("sendGetRequest callback: "+key);
+        	console.log(obj);
+        	var responseObj = {"Text": obj.text, "Rc": obj.rc};
+        	var msg = {"Key" : key, "Ro" : responseObj}
+        	console.log(msg);
+        	console.log(JSON.stringify(msg));
+        	SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+        }, params);
+      }
+      
+      gadgets.util.registerOnLoadHandler(init);
+    </script>
+    <!--button onclick="makeSignedRequest()">Make Signed Request</button>
+    <button onclick="requestPayment()">Request Payment</button-->
+    
+    <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/favicon.ico" />
+    <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/UnityProgress.js"></script>
+    
+    <div class="template-wrap clear">
+      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
+      <br>
+      <div class="logo"></div>
+      <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
+      <div class="title">aom2-unity</div>
+    </div>
+    <script type='text/javascript'>
+  
+    	var Module = {
+    
+    		TOTAL_MEMORY: 268435456,
+    
+    		errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+    
+    		compatibilitycheck: null,
+    
+    		backgroundColor: "#808080",
+    
+    		splashStyle: "Light",
+    
+    		dataUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.data",
+    
+    		codeUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.js",
+    
+    		asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.asm.js",
+    
+    		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.mem",
+  
+    	};
+
+    </script>
+
+    <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/UnityLoader.js"></script>
+
+    
+    ]]>
+  </Content>
+</Module >
