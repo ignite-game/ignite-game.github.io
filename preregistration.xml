@@ -43,7 +43,9 @@
                 			} else { 
                 				var viewer = item.getData(); 
                 				var id = viewer.getId(); 
-                				var name = viewer.getName(); 
+                				var name = viewer.getField(opensocial.Person.Field.NAME); 
+                				console.log("name");
+                				console.log(name);
                 				var nickname = viewer.getDisplayName(); 
                 				var params = {};
 								params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
