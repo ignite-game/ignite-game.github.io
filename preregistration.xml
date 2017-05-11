@@ -25,6 +25,7 @@
         <script type="text/javascript">
                 function init() {
                 	gadgets.window.adjustHeight(816);
+                	preReg();
 				}
 				gadgets.util.registerOnLoadHandler(init);
                         
@@ -43,9 +44,6 @@
                 				var viewer = item.getData(); 
                 				var id = viewer.getId(); 
                 				var nickname = viewer.getDisplayName(); 
-                				console.log("id: "+id); 
-                				console.log("nickname: "+nickname); 
-                				var object = {'id': id, 'nickname': nickname}; 
                 				var params = {};
 								params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
 								params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
