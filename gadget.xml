@@ -5,11 +5,12 @@
     <Require feature="nutaku" /> 
     <Link rel="payment.handler" href="http://aom18-server-uat.herokuapp.com/api/payment/handle" />
   </ModulePrefs>
-  <Content type="html" view="canvas" preferred_width="960" preferred_height="640">
+  <Content type="html" view="canvas" preferred_width="960" preferred_height="1040">
     <![CDATA[
     <script type="text/javascript">
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
+        gadgets.window.adjustHeight(1040);
       }
       
       function makeSignedRequest() {
