@@ -7,7 +7,7 @@
         define('CDN_URL', $config['CDN_URL']);
         define('FLASH_URL', $config['FLASH_URL']);
         define('WIDTH', 1020);
-        define('HEIGHT', 816);
+        define('HEIGHT', 619);
         ?>
 <Module>
     <ModulePrefs title=" Attack On Moe H ">
@@ -24,13 +24,13 @@
 		</style>
         <script type="text/javascript">
                 function init() {
-                	gadgets.window.adjustHeight(816);
+                	gadgets.window.adjustHeight(619);
                 	preReg();
 				}
 				gadgets.util.registerOnLoadHandler(init);
                         
                 function preReg(){
-                	gadgets.window.adjustHeight(816);
+                	gadgets.window.adjustHeight(619);
                 	var req = opensocial.newDataRequest(); 
                 	req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
                 	req.send(function(response) { 
@@ -63,6 +63,6 @@
                 	});
                 }
         </script>
-        <img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/attack-on-moe-thank-you-graphic.png" style="margin: 10px auto; display: block;">
+        <img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/attack-on-moe-thank-you-graphic.png" style="margin: 40px auto; display: block;">
      ]]></Content>
 </Module>
