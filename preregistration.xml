@@ -42,7 +42,6 @@
                 				var nickname = viewer.getDisplayName(); 
                 				console.log("id: "+id); 
                 				console.log("nickname: "+nickname); 
-                				//var object = '{\"id\":'+id+',\"nickname\":\"'+nickname+'\"}';
                 				var object = {'id': id, 'nickname': nickname}; 
                 				var params = {};
 								params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
@@ -63,6 +62,6 @@
                 	});
                 }
         </script>
-        <button onclick="preReg()">button</button>
+        <img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/attack-on-moe-thank-you-graphic.png">
      ]]></Content>
 </Module>
