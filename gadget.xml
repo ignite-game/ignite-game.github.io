@@ -5,8 +5,13 @@
     <Require feature="nutaku" /> 
     <Link rel="payment.handler" href="http://aom18-server-uat.herokuapp.com/api/payment/handle" />
   </ModulePrefs>
-  <Content type="html" view="canvas" preferred_width="1111" preferred_height="1040">
+  <Content type="html" view="canvas" preferred_width="960" preferred_height="1040">
     <![CDATA[
+    <style>
+    	#canvas {
+    		width: 100%;
+    	}
+    </style>
     <script type="text/javascript">
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
@@ -127,7 +132,7 @@
     <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/UnityProgress.js"></script>
     
     <div class="template-wrap clear">
-      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="1111px"></canvas>
+      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
       <br>
       <div class="logo"></div>
       <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
@@ -160,7 +165,7 @@
     </script>
 
     <script src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/UnityLoader.js"></script>
-
+    
     
     ]]>
   </Content>
