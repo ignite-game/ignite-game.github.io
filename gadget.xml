@@ -10,7 +10,7 @@
     <script type="text/javascript">
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
-        gadgets.window.adjustHeight(1040);
+        //gadgets.window.adjustHeight(619);
       }
       
       function makeSignedRequest() {
