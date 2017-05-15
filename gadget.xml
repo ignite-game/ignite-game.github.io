@@ -133,10 +133,8 @@ width: 100%; ">
 		  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
 		  <br>
 		  <div class="logo"></div>
-		  <!--<div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
-		  <div class="title">aom2-unity</div>-->
-      <div class="fullscreen"></div>
-		  <div class="title"></div>
+		  <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
+		  <div class="title">aom2-unity</div>
 		</div>
 	</div>
 	<div style="clear: both;"></div>
