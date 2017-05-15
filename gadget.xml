@@ -11,7 +11,7 @@
     <script type="text/javascript">
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
-        //gadgets.window.adjustHeight(619);
+        gadgets.window.adjustHeight();
       }
       
       function makeSignedRequest() {
