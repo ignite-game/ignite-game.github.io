@@ -155,7 +155,7 @@
     
     		asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.asm.js",
     
-    		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.mem",
+    		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.memgz",
   
     	};
 
