@@ -130,7 +130,7 @@
     <div style="background: url('https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/background.jpg') no-repeat top center;
 width: 100%;
 background-size: contain;">
-		<div class="template-wrap clear">
+		<div style="width: 980px; padding-bottom: 20px;">
 		  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
 		  <br>
 		  <div class="logo"></div>
