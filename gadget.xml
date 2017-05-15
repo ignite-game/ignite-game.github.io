@@ -6,7 +6,7 @@
     <Require feature="nutaku" /> 
     <Link rel="payment.handler" href="http://aom18-server-uat.herokuapp.com/api/payment/handle" />
   </ModulePrefs>
-  <Content type="html" view="canvas" preferred_width="960">
+  <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
     <script type="text/javascript">
       function init() {
