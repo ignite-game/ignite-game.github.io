@@ -149,13 +149,13 @@
     
     		splashStyle: "Light",
     
-    		dataUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.datagz",
+    		dataUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.data",
     
-    		codeUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.jsgz",
+    		codeUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.js",
     
-    		asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.asm.jsgz",
+    		asmUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.asm.js",
     
-    		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.memgz",
+    		memUrl: "https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/Release/aom-r18-ricky.mem",
   
     	};
 
