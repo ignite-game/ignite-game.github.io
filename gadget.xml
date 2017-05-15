@@ -133,6 +133,9 @@
       <div class="fullscreen"><img src="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18-ricky/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
       <div class="title">aom2-unity</div>
     </div>
+
+    <iframe src="Source url (I'm using dropbox)" style="border:0px #000000 none;" name="Game name" scrolling="no" frameborder="1" marginheight="px" marginwidth="320px" height="320px" width="480px"></iframe>
+
     <script type='text/javascript'>
   
     	var Module = {
