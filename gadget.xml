@@ -127,7 +127,7 @@
     <link rel="shortcut icon" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/favicon.ico" />
     <script src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/UnityProgress.js"></script>
     
-    <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background.jpg') no-repeat top center;
+    <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background001.jpg') no-repeat top center;
 width: 100%; ">
 		<div style="width: 980px; padding-top: 200px; padding-bottom: 200px; display: block; margin-right: auto; margin-left: auto;">
 		  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
