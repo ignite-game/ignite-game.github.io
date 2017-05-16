@@ -123,11 +123,11 @@
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
-    <link rel="stylesheet" href="http://aomcdn.ignite-ga.me/aom-r18-ricky/TemplateData/style.css">
-    <link rel="shortcut icon" href="http://aomcdn.ignite-ga.me/aom-r18-ricky/TemplateData/favicon.ico" />
-    <script src="http://aomcdn.ignite-ga.me/aom-r18-ricky/TemplateData/UnityProgress.js"></script>
+    <link rel="stylesheet" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/style.css">
+    <link rel="shortcut icon" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/favicon.ico" />
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/UnityProgress.js"></script>
     
-    <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18-ricky/TemplateData/background.jpg') no-repeat top center;
+    <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background.jpg') no-repeat top center;
 width: 100%; ">
 		<div style="width: 980px; padding-top: 200px; padding-bottom: 200px; display: block; margin-right: auto; margin-left: auto;">
 		  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
@@ -152,19 +152,19 @@ width: 100%; ">
     
     		splashStyle: "Light",
     
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18-ricky/Release/aom-r18-ricky.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18-ricky/Release/aom-r18-ricky.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18-ricky/Release/aom-r18-ricky.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18-ricky/Release/aom-r18-ricky.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release/aom-r18.mem",
   
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18-ricky/Release/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release/UnityLoader.js"></script>
     
     
     ]]>
