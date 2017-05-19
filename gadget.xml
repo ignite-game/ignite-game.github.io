@@ -123,7 +123,7 @@
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
-    <link rel="stylesheet" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/style.css">
+    <link rel="stylesheet" href="https://s3-ap-southeast-1.amazonaws.com/attack-on-moe/aom-r18/TemplateData/style.css">
     <link rel="shortcut icon" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/favicon.ico" />
     <script src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/UnityProgress.js"></script>
     
@@ -134,7 +134,7 @@ width: 100%; ">
 		  <br>
 		  <div class="logo"></div>
 		  <div class="fullscreen"></div>
-		  <div class="title">"Attack On Moe H is currently in soft-launch. Some bugs may occur."</div>
+		  <div class="title">Attack On Moe H is currently in soft-launch. Some bugs may occur.</div>
 		</div>
 	</div>
 	<div style="clear: both;"></div>
