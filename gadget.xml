@@ -14,12 +14,6 @@
         gadgets.window.adjustHeight();
       }
 
-      window.onbeforeunload = function(e){
-
-        SendMessage("DefaultPersistentManager", "SaveAll");
-
-      };
-
       function makeSignedRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
