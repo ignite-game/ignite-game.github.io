@@ -15,7 +15,9 @@
       }
 
       window.onbeforeunload = function(e){
-          console.log("Close Browser Now");
+
+        window.alert("Close Browser Now");
+
       };
 
       function makeSignedRequest() {
