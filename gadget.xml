@@ -16,7 +16,7 @@
 
       window.onbeforeunload = function(e){
 
-        window.alert("Close Browser Now");
+        SendMessage("DefaultPersistentManager", "SaveAll");
 
       };
 
@@ -119,8 +119,6 @@
         	console.log(msg);
         	console.log(JSON.stringify(msg));
         	SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
-                  window.alert("Saved");
-
         }, params);
       }
       
