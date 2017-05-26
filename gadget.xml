@@ -119,6 +119,8 @@
         	console.log(msg);
         	console.log(JSON.stringify(msg));
         	SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+                  window.alert("Saved");
+
         }, params);
       }
       
