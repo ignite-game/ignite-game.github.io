@@ -14,6 +14,10 @@
         gadgets.window.adjustHeight();
       }
 
+      window.onbeforeunload = function(e){
+          console.log("Close Browser Now");
+      };
+
       function makeSignedRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
