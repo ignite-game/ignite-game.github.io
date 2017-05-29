@@ -30,21 +30,7 @@
 
         itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
         
-        if(jsonObj.Id == "gems_300"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 100;
-        } else if(jsonObj.Id == "gems_945"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 300;
-        } else if(jsonObj.Id == "gems_1620"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 500;
-        } else if(jsonObj.Id == "gems_3360"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 1000;
-        } else if(jsonObj.Id == "gems_10620"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 3000;
-        } else if(jsonObj.Id == "gems_special_offer"){
-          itemParams[opensocial.BillingItem.Field.PRICE] = 300;
-        } else {
-          itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
-        }
+        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
 
         itemParams[opensocial.BillingItem.Field.COUNT] = 1;
         itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
