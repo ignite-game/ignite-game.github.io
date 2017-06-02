@@ -141,7 +141,7 @@ width: 100%; ">
       <br>
       <div align="center">Attack On Moe H is currently in soft-launch. Some bugs may occur.</div>
       <br>
-      <div align="center">The “Mirror of Truth” issue has been fixed! If you run into any bugs, please contact us via Game Support.</div>
+      <div align="center">Server Maintenance : June 2th, 11 : 00 - 12 : 00(GMT)</div>
 		</div>
 	</div>
 	<div style="clear: both;"></div>
@@ -159,19 +159,19 @@ width: 100%; ">
     
     		splashStyle: "Light",
     
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_12/aom-r18.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_13/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_12/aom-r18.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_13/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_12/aom-r18.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_13/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_12/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_13/aom-r18.mem",
   
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_12/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_0_1_5_13/UnityLoader.js"></script>
     
     
     ]]>
