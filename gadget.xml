@@ -81,7 +81,7 @@
 
         objectsToSave[key] = object;
 
-        if(_.size(objectsToSave) >= 11 || key === 'Ignite.AOM2.DropboxManager') {
+        if(_.size(objectsToSave) >= 11 || key === EXCEPTION_CLASS) {
           var params = {};
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
