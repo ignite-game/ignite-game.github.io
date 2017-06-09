@@ -76,7 +76,7 @@
       var EXCEPTION_CLASS = 'Ignite.AOM2.DropboxManager';
 
       // TODO: Dirty solution right now. To be fixed later on
-      function sendSaveRequest(key, object){
+      function sendSaveRequestFix(key, object){
       	console.log("sendSaveRequet: "+key);
 
         objectsToSave[key] = object;
@@ -99,6 +99,21 @@
           var msg = {"Key" : key, "Ro" : responseObj}
           SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
         }
+      }
+      
+      function sendSaveRequest(key, object){
+        console.log("sendSaveRequet: "+key);
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
+            console.log("sendSaveRequest callback: "+key);
+            var responseObj = {"Text": obj.text, "Rc": obj.rc};
+            var msg = {"Key" : key, "Ro" : responseObj}
+            SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+        }, params);
       }
       
       function sendGetRequest(key){
