@@ -10,7 +10,7 @@
     <![CDATA[
     <script type="text/javascript">
       function init() {
-        console.log('gadgets.util.registerOnLoadHandler called');
+        <!--console.log('gadgets.util.registerOnLoadHandler called');-->
         gadgets.window.adjustHeight();
       }
       
@@ -45,7 +45,7 @@
         opensocial.requestPayment(payment, function(response) { 
           if (response.hadError()) { 
             // error 
-            console.error('error when request payment');
+            <!--console.error('error when request payment');-->
            // console.error(response);
            //  console.error(response.getData());
             var errorJson = {}
@@ -55,7 +55,7 @@
           	var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
             SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
           } else { 
-            console.log("requestPayment callback: success");
+            <!--console.log("requestPayment callback: success");-->
         	  var payment = response.getData();
             var items = payment.getField('items');
             var paymentJson = {};
@@ -72,14 +72,14 @@
       }
       
       function sendSaveRequest(key, object){
-      	console.log("sendSaveRequet: "+key);
+      	<!--console.log("sendSaveRequest: "+key);-->
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
-        	console.log("sendSaveRequest callback: "+key);
+        	<!--console.log("sendSaveRequest callback: "+key);-->
         	var responseObj = {"Text": obj.text, "Rc": obj.rc};
         	var msg = {"Key" : key, "Ro" : responseObj}
         	SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
@@ -87,14 +87,14 @@
       }
       
       function sendGetRequest(key){
-      	console.log("sendGetRequet: "+key);
+      	<!--console.log("sendGetRequest: "+key);-->
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
-        	console.log("sendGetRequest callback: "+key);
+        	<!--console.log("sendGetRequest callback: "+key);-->
         	var responseObj = {"Text": obj.text, "Rc": obj.rc};
         	var msg = {"Key" : key, "Ro" : responseObj}
         	SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
