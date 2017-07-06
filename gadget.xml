@@ -138,7 +138,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/Player/loginById", function(obj) {
+        gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/Player/loginById", function(obj) {
         	console.log("sendLoginRequest callback");
         	var responseObj = {"Text": obj.text, "Rc": obj.rc};
         	SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
