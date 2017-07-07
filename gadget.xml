@@ -162,9 +162,9 @@ width: 100%; ">
 		  <div class="logo"></div>
 		  <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
 		  <div class="title"></div>
-      <!--<br>
       <br>
-      <div align="center">Server Maintenance : June 26th, 10 : 00 - 11 : 00(GMT)</div>-->
+      <br>
+      <div align="center">Server Maintenance : July 7th, 09 : 00 - 10 : 00(GMT)</div>
 		</div>
 	</div>
 	<div style="clear: both;"></div>
