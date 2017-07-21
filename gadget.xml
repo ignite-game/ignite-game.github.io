@@ -188,7 +188,7 @@ width: 100%; ">
     
     		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestSuperHero/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestDataDecode22/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestSuperHero/aom-r18.mem",
   
     	};
 
