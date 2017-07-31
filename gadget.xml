@@ -164,8 +164,8 @@ width: 100%; ">
 		  <div class="title"></div>
       <br>
       <br>
-      <div align="center">Server Maintenance : July 31st, 09: 00 - 10 : 00(GMT)</div>
-      <br>
+      <!-- <div align="center">Server Maintenance : July 31st, 09: 00 - 10 : 00(GMT)</div>
+      <br> -->
       <div align="center">[Special Announcement] Please claim all your gifts from your Mailbox before August 4th, as there will be a Mailbox upgrade that will clear all unclaimed gifts.</div>
 		</div>
 	</div>
@@ -184,19 +184,19 @@ width: 100%; ">
     
     		splashStyle: "Light",
   
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount/aom-r18.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount2/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount/aom-r18.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount2/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount/aom-r18.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount2/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount2/aom-r18.mem",
   
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount2/UnityLoader.js"></script>
     
     
     ]]>
