@@ -184,19 +184,19 @@ width: 100%; ">
     
     		splashStyle: "Light",
   
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount3/aom-r18.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount3/aom-r18.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount3/aom-r18.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount3/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan/aom-r18.mem",
   
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestCPDiscount3/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan/UnityLoader.js"></script>
     
     
     ]]>
