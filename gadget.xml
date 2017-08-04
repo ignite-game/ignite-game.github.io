@@ -145,7 +145,7 @@
         }, params);
       }
       
-      gadgets.util.registerOnLoadHandler(init);
+      <!-- gadgets.util.registerOnLoadHandler(init); -->
     </script>
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
@@ -201,6 +201,9 @@ width: 100%; ">
 
     <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestNewMoetan4/UnityLoader.js"></script>
     
+    <script type='text/javascript'>
+      gadgets.util.registerOnLoadHandler(init);
+    </script>
     
     ]]>
   </Content>
