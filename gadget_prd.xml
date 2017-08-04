@@ -135,8 +135,8 @@ width: 100%; ">
       <br>
       <!-- <br>
       <div align="center">Server Maintenance : August 4th, 08: 00 - 10 : 00(GMT)</div> -->
-      <!-- <br>
-      <div align="center"><img src="http://aomcdn.ignite-ga.me/aom-r18/promot_girl_banC.jpg" width="480" height="120"/></div> -->
+      <br>
+      <div align="center"><img src="http://aomcdn.ignite-ga.me/aom-r18/promot_girl_banC.jpg" width="480" height="120"/></div>
 		</div>
 	</div>
 	<div style="clear: both;"></div>
@@ -154,18 +154,18 @@ width: 100%; ">
     
     		splashStyle: "Light",
     
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_4/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_4/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_4/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_4/aom-r18.mem",
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_4/UnityLoader.js"></script>
     
     
     ]]>
