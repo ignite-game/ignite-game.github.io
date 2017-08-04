@@ -126,17 +126,17 @@
     
     <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background003.jpg') no-repeat top center;
 width: 100%; ">
-		<div style="width: 960px; padding-top: 200px; padding-bottom: 200px; display: block; margin-right: auto; margin-left: auto;">
+		<div style="width: 960px; padding-top: 200px; padding-bottom: 10px; display: block; margin-right: auto; margin-left: auto;">
 		  <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
 		  <br>
 		  <div class="logo"></div>
 		  <div class="fullscreen"></div>
 		  <div class="title"></div>
       <br>
-      <br>
-      <div align="center">Server Maintenance : August 4th, 08: 00 - 10 : 00(GMT)</div>
-      <br>
-      <div align="center">[Special Announcement] Please claim all your gifts from your Mailbox before August 4th, as there will be a Mailbox upgrade that will clear all unclaimed gifts.</div>
+      <!-- <br>
+      <div align="center">Server Maintenance : August 4th, 08: 00 - 10 : 00(GMT)</div> -->
+      <!-- <br>
+      <div align="center"><img src="http://aomcdn.ignite-ga.me/aom-r18/promot_girl_banC.jpg" width="480" height="120"/></div> -->
 		</div>
 	</div>
 	<div style="clear: both;"></div>
@@ -154,18 +154,18 @@ width: 100%; ">
     
     		splashStyle: "Light",
     
-    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_1/aom-r18.data",
+    		dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.data",
     
-    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_1/aom-r18.js",
+    		codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.js",
     
-    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_1/aom-r18.asm.js",
+    		asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.asm.js",
     
-    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_1/aom-r18.mem",
+    		memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/aom-r18.mem",
     	};
 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_1/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_1_4_3_2/UnityLoader.js"></script>
     
     
     ]]>
