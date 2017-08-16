@@ -146,15 +146,19 @@
             } else {
               var viewer = item.getData();
               var id = viewer.getId();
+              var requestURL = "http://aom18-sandbox.ignite-ga.me/api/Player/loginById";
               var displayName = viewer.getDisplayName();
               console.log("displayName: "+displayName);
+              if (typeof displayName === 'string' || displayName instanceof String) {
+                requestURL = requestURL + "?displayName="+displayName;
+              }
 
               var params = {};
               params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
               params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
               params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
               params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-              gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/Player/loginById?displayName="+displayName, function(obj) {
+              gadgets.io.makeRequest(requestURL, function(obj) {
                 console.log("sendLoginRequest callback");
                 var responseObj = {"Text": obj.text, "Rc": obj.rc};
                 SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
