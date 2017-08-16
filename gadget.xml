@@ -133,9 +133,7 @@
       
       function sendLoginRequest(){
       	console.log("sendLoginRequest");
-      	var viewer = data.get("viewer").getData();
-      	var name = viewer.getDisplayName();
-      	console.log("viewer "+viewer);
+      	var name = opensocial.Person.getDisplayName();
       	console.log("name "+name);
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
