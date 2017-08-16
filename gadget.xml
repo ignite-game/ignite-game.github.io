@@ -133,6 +133,10 @@
       
       function sendLoginRequest(){
       	console.log("sendLoginRequest");
+      	var viewer = data.get("viewer").getData();
+      	var name = viewer.getDisplayName();
+      	console.log("viewer "+viewer);
+      	console.log("name "+name);
       	var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
