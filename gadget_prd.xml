@@ -102,17 +102,40 @@
       }
 
       function sendLoginRequest(){
-      	<!--console.log("sendLoginRequest");-->
-      	var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/Player/loginById", function(obj) {
-        	<!--console.log("sendLoginRequest callback");-->
-        	var responseObj = {"Text": obj.text, "Rc": obj.rc};
-        	SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
-        }, params);
+        <!--console.log("sendLoginRequest");-->
+
+        var req = opensocial.newDataRequest();
+        req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+        req.send(function(response) {
+          var requestURL = "http://aom18-prd.ignite-ga.me/api/Player/loginById";
+          if (response.hadError()) {
+            // error
+          } else {
+            var item = response.get("viewer");
+            if (item.hadError()) {
+              // error
+            } else {
+              var viewer = item.getData();
+              var id = viewer.getId();
+              var displayName = viewer.getDisplayName();
+              <!--console.log("displayName: "+displayName);-->
+              if (typeof displayName === 'string' || displayName instanceof String) {
+                requestURL = requestURL + "?displayName="+displayName;
+              }
+            }
+          }
+
+		  var params = {};
+		  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+		  params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+		  gadgets.io.makeRequest(requestURL, function(obj) {
+			<!--console.log("sendLoginRequest callback");-->
+			var responseObj = {"Text": obj.text, "Rc": obj.rc};
+			SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
+		  }, params);
+        });
       }
 
       gadgets.util.registerOnLoadHandler(init);
