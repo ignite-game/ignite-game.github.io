@@ -172,7 +172,7 @@
         backgroundColor: "#808080",
         splashStyle: "Light",
         dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAuto3/aom-r18.datagz",
-        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAuto3/aom-r18.jszg",
+        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAuto3/aom-r18.jsgz",
         asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAuto3/aom-r18.asm.jsgz",
         memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAuto3/aom-r18.memgz",
       };
