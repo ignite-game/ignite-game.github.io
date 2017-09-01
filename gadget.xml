@@ -149,7 +149,7 @@
     <script src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/UnityProgress.js"></script>
     
     <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background003.jpg') no-repeat top center; width: 100%; ">
-      <div style="width: 960px; padding-top: 200px; padding-bottom: 10px; display: block; margin-right: auto; margin-left: auto;">
+      <div style="width: 960px; padding-top: 200px; padding-bottom: 200px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
