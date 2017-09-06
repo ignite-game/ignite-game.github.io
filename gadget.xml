@@ -14,15 +14,19 @@
         console.log('gadgets.util.registerOnLoadHandler called');
         gadgets.window.adjustHeight();
       }
-      
+
       function setAspectRatio() {
       	var ca = document.getElementById("canvas");
+        console.log("try adjust aspectRatio");
       	var r = ca.width / ca.height;
       	if (r > 1.5) {
       		ca.width = ca.height * 1.5;
       	} else {
-      		ca.height = ca.width * 1.5;
+      		ca.height = ca.width / 1.5;
       	}
+        ca.addEventListener("transitionend", function(event){
+          console.log("do receive transitionend event after resize");
+        });
       }
 
       function makeSignedRequest() {
