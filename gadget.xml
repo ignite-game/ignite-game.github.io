@@ -30,7 +30,8 @@
         
         var ca = document.getElementById("canvas");
         ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        window.top.document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
       }
