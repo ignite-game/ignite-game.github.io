@@ -15,6 +15,27 @@
         gadgets.window.adjustHeight();
       }
 
+      function doChangeAspecRatio() {
+      	var ca = document.getElementById("canvas");
+      	var r = ca.width / ca.height;
+      	if (r > 1.5) {
+      		ca.width = ca.height * 1.5;
+      	} else {
+      		ca.height = ca.width / 1.5;
+      	}
+
+      }
+
+      function setAspectRatio() {
+        
+        var ca = document.getElementById("canvas");
+        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        window.top.document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+      }
+
       function makeSignedRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
@@ -153,7 +174,7 @@
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
-        <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);" /></div>
+        <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div>
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
