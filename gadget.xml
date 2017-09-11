@@ -31,9 +31,12 @@
         var ca = document.getElementById("canvas");
         ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("fullscreenchange", doChangeAspecRatio, false); 
       }
 
       function makeSignedRequest() {
