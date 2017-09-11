@@ -31,9 +31,12 @@
         var ca = document.getElementById("canvas");
         ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("fullscreenchange", doChangeAspecRatio, false); 
       }
 
       function makeSignedRequest() {
@@ -192,14 +195,14 @@
         compatibilitycheck: null,
         backgroundColor: "#808080",
         splashStyle: "Light",
-        dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestDailyButton2/aom-r18.data",
-        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestDailyButton2/aom-r18.js",
-        asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestDailyButton2/aom-r18.asm.js",
-        memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestDailyButton2/aom-r18.mem",
+        dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestFullscreen3/aom-r18.data",
+        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestFullscreen3/aom-r18.js",
+        asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestFullscreen3/aom-r18.asm.js",
+        memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestFullscreen3/aom-r18.mem",
       };
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestDailyButton2/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestFullscreen3/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
