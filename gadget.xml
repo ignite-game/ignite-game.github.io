@@ -195,14 +195,14 @@
         compatibilitycheck: null,
         backgroundColor: "#808080",
         splashStyle: "Light",
-        dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestBoss021/aom-r18.data",
-        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestBoss021/aom-r18.js",
-        asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestBoss021/aom-r18.asm.js",
-        memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestBoss021/aom-r18.mem",
+        dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestTic120/aom-r18.data",
+        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestTic120/aom-r18.js",
+        asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestTic120/aom-r18.asm.js",
+        memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestTic120/aom-r18.mem",
       };
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestBoss021/UnityLoader.js"></script>
+    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestTic120/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
