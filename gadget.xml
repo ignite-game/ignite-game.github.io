@@ -177,7 +177,7 @@
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
-        <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div>
+		<!-- <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div> -->
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
