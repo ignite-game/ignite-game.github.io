@@ -8,10 +8,33 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
+    <script src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript">
       function init() {
         <!--console.log('gadgets.util.registerOnLoadHandler called');-->
         gadgets.window.adjustHeight();
+      }
+
+      function doChangeAspecRatio() {
+        var ca = document.getElementById("canvas");
+        var r = ca.width / ca.height;
+        if (r > 1.5) {
+          ca.width = ca.height * 1.5;
+        } else {
+          ca.height = ca.width / 1.5;
+        }
+      }
+
+      function setAspectRatio() {
+        var ca = document.getElementById("canvas");
+        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("fullscreenchange", doChangeAspecRatio, false); 
       }
 
       function makeSignedRequest() {

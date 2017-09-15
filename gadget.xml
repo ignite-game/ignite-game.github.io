@@ -16,18 +16,16 @@
       }
 
       function doChangeAspecRatio() {
-      	var ca = document.getElementById("canvas");
-      	var r = ca.width / ca.height;
-      	if (r > 1.5) {
-      		ca.width = ca.height * 1.5;
-      	} else {
-      		ca.height = ca.width / 1.5;
-      	}
-
+        var ca = document.getElementById("canvas");
+        var r = ca.width / ca.height;
+        if (r > 1.5) {
+          ca.width = ca.height * 1.5;
+        } else {
+          ca.height = ca.width / 1.5;
+        }
       }
 
       function setAspectRatio() {
-        
         var ca = document.getElementById("canvas");
         ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
         ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
