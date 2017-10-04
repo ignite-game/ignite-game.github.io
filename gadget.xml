@@ -10,127 +10,206 @@
     <![CDATA[
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript">
-      function init() {
-        console.log('gadgets.util.registerOnLoadHandler called');
-        gadgets.window.adjustHeight();
-      }
+    function init() {
+      console.log('gadgets.util.registerOnLoadHandler called');
+      gadgets.window.adjustHeight();
+    }
 
-      function doChangeAspecRatio() {
-        var ca = document.getElementById("canvas");
-        var r = ca.width / ca.height;
-        if (r > 1.5) {
-          ca.width = ca.height * 1.5;
-        } else {
-          ca.height = ca.width / 1.5;
-        }
+    function doChangeAspecRatio() {
+      var ca = document.getElementById("canvas");
+      var r = ca.width / ca.height;
+      if (r > 1.5) {
+        ca.width = ca.height * 1.5;
+      } else {
+        ca.height = ca.width / 1.5;
       }
+    }
 
-      function setAspectRatio() {
-        var ca = document.getElementById("canvas");
-        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
-        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
-        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("fullscreenchange", doChangeAspecRatio, false); 
-      }
+    function setAspectRatio() {
+      var ca = document.getElementById("canvas");
+      ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+      ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+      ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+      ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+      document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+      document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+      document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+      document.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+    }
 
-      function makeSignedRequest() {
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/payment/handle", function(obj) {}, params);
-      }
+    function makeSignedRequest() {
+      var params = {};
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({
+        id: 123456789
+      });
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/payment/handle", function(obj) {}, params);
+    }
 
-      function requestPayment(object) {
+    function requestPayment(object) {
       //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
-        var itemParams = {};
-        var jsonObj = JSON.parse(object);
+      var itemParams = {};
+      var jsonObj = JSON.parse(object);
 
-        itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
+      itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
 
-        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
+      itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
 
-        itemParams[opensocial.BillingItem.Field.COUNT] = 1;
-        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
-        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
-        itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomcdn.ignite-ga.me/aom-r18/CurrencyPackageData/"+ jsonObj.Id + ".png";
-        
-        var item = opensocial.newBillingItem(itemParams); 
-        var params = {};
-        params[opensocial.Payment.Field.ITEMS] = [item];
-        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT; 
-        var payment = opensocial.newPayment(params); 
-        opensocial.requestPayment(payment, function(response) { 
-          if (response.hadError()) { 
-            // error 
-            console.error('error when request payment');
-            // console.error(response);
-            // console.error(response.getData());
-            var errorJson = {}
-            errorJson.errorCode = response.getErrorCode();
-            errorJson.errorMessage = response.getErrorMessage();
-            var responseObj = {"Text": JSON.stringify(errorJson) , "Rc": 200};
-            var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
-            SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
-          } else { 
-            console.log("requestPayment callback: success");
-            var payment = response.getData();
-            var items = payment.getField('items');
-            var paymentJson = {};
-            paymentJson.Id = items[0].fields_.skuId;
-            paymentJson.ItemName = items[0].fields_.name;
-            paymentJson.ItemDesc = items[0].fields_.description;
-            paymentJson.Price = items[0].fields_.price;
-            paymentJson.ResponseMsg = payment.getField('responseCode');
-            var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
-            var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
-            SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
-          } 
+      itemParams[opensocial.BillingItem.Field.COUNT] = 1;
+      itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
+      itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
+      itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomcdn.ignite-ga.me/aom-r18/CurrencyPackageData/" + jsonObj.Id + ".png";
+
+      var item = opensocial.newBillingItem(itemParams);
+      var params = {};
+      params[opensocial.Payment.Field.ITEMS] = [item];
+      params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT;
+      var payment = opensocial.newPayment(params);
+      opensocial.requestPayment(payment, function(response) {
+        if (response.hadError()) {
+          // error 
+          console.error('error when request payment');
+          // console.error(response);
+          // console.error(response.getData());
+          var errorJson = {}
+          errorJson.errorCode = response.getErrorCode();
+          errorJson.errorMessage = response.getErrorMessage();
+          var responseObj = {
+            "Text": JSON.stringify(errorJson),
+            "Rc": 200
+          };
+          var msg = {
+            "Key": "paymentResponseError",
+            "Ro": responseObj
+          }
+          SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
+        } else {
+          console.log("requestPayment callback: success");
+          var payment = response.getData();
+          var items = payment.getField('items');
+          var paymentJson = {};
+          paymentJson.Id = items[0].fields_.skuId;
+          paymentJson.ItemName = items[0].fields_.name;
+          paymentJson.ItemDesc = items[0].fields_.description;
+          paymentJson.Price = items[0].fields_.price;
+          paymentJson.ResponseMsg = payment.getField('responseCode');
+          var responseObj = {
+            "Text": JSON.stringify(paymentJson),
+            "Rc": 200
+          };
+          var msg = {
+            "Key": "paymentResponseSuccess",
+            "Ro": responseObj
+          }
+          SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
+        }
+      });
+    }
+
+    function sendSaveRequest(key, object) {
+      console.log("sendSaveRequet: " + key);
+      var params = {};
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({
+        data: object
+      });
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/setByClass?class_name=" + key, function(obj) {
+        console.log("sendSaveRequest callback: " + key);
+        var responseObj = {
+          "Text": obj.text,
+          "Rc": obj.rc
+        };
+        var msg = {
+          "Key": key,
+          "Ro": responseObj
+        }
+        SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+      }, params);
+    }
+
+    function sendGetRequest(key) {
+      console.log("sendGetRequet: " + key);
+      var params = {};
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/getByClass?class_name=" + key, function(obj) {
+        console.log("sendGetRequest callback: " + key);
+        var responseObj = {
+          "Text": obj.text,
+          "Rc": obj.rc
+        };
+        var msg = {
+          "Key": key,
+          "Ro": responseObj
+        }
+        SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+      }, params);
+    }
+
+    var nutakuUser = null;
+
+    function queryNutakuUser() {
+      console.log("query nutaku user");
+      if(nutakuUser != null){
+        return Promise.resolve(nutakuUser);
+      } else {
+        return new Promise((resolve, reject) => {
+          var req = opensocial.newDataRequest();
+          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+          req.send(function(response) {
+            if (response.hadError()) {
+              window.alert("can not query user from api server");
+              reject("can not query user from api server");
+            } else {
+              var item = response.get("viewer");
+              if (item.hadError()) {
+                window.alert("error for getting viewer in response");
+                reject("error for getting viewer in response");
+              } else {
+                nutakuUser = item.getData();
+                resolve(nutakuUser)
+              }
+            }
+          });  
         });
       }
-      
-      function sendSaveRequest(key, object){
-        console.log("sendSaveRequet: "+key);
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
-          console.log("sendSaveRequest callback: "+key);
-          var responseObj = {"Text": obj.text, "Rc": obj.rc};
-          var msg = {"Key" : key, "Ro" : responseObj}
-          SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
-        }, params);
-      }
-      
-      function sendGetRequest(key){
-        console.log("sendGetRequet: "+key);
+    };
+
+    function sendLoginRequest() {
+      console.log("sendLoginRequest");
+      var requestURL = "http://aom18-sandbox.ignite-ga.me/api/Player/loginById";
+      function doSendRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
-          console.log("sendGetRequest callback: "+key);
-          var responseObj = {"Text": obj.text, "Rc": obj.rc};
-          var msg = {"Key" : key, "Ro" : responseObj}
-          SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+        gadgets.io.makeRequest(requestURL, function(obj) {
+          console.log("sendLoginRequest callback");
+          var responseObj = {
+            "Text": obj.text,
+            "Rc": obj.rc
+          };
+          SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
         }, params);
-      }
-
-      function sendLoginRequest(){
-        console.log("sendLoginRequest");
-
+      };
+      if (nutakuUser != null) {
+        var id = nutakuUser.getId();
+        var displayName = nutakuUser.getDisplayName();
+        console.log("displayName: " + displayName);
+        if (typeof displayName === 'string' || displayName instanceof String) {
+          requestURL = requestURL + "?displayName=" + displayName;
+        }
+      } else {
         var req = opensocial.newDataRequest();
         req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
         req.send(function(response) {
-          var requestURL = "http://aom18-sandbox.ignite-ga.me/api/Player/loginById";
           if (response.hadError()) {
             // error
           } else {
@@ -141,28 +220,64 @@
               var viewer = item.getData();
               var id = viewer.getId();
               var displayName = viewer.getDisplayName();
-              console.log("displayName: "+displayName);
+              console.log("displayName: " + displayName);
               if (typeof displayName === 'string' || displayName instanceof String) {
-                requestURL = requestURL + "?displayName="+displayName;
+                requestURL = requestURL + "?displayName=" + displayName;
               }
             }
           }
-
-		  var params = {};
-		  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-		  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
-		  params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-		  gadgets.io.makeRequest(requestURL, function(obj) {
-			console.log("sendLoginRequest callback");
-			var responseObj = {"Text": obj.text, "Rc": obj.rc};
-			SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
-		  }, params);
+          doSendRequest();
         });
-      }
+      };
+    }
 
-      gadgets.util.registerOnLoadHandler(init);
-    </script>
+    gadgets.util.registerOnLoadHandler(init);
+
+    function isPrivateMode() {
+      return new Promise((resolve) => {
+        const on = () => resolve(true); // is in private mode
+        const off = () => resolve(false); // not private mode
+        const testLocalStorage = () => {
+          try {
+            if (localStorage.length) off();
+            else {
+              localStorage.x = 1;
+              localStorage.removeItem('x');
+              off();
+            }
+          } catch (e) {
+            // Safari only enables cookie in private mode
+            // if cookie is disabled then all client side storage is disabled
+            // if all client side storage is disabled, then there is no point
+            // in using private mode
+            navigator.cookieEnabled ? on() : off();
+          }
+        };
+        // Chrome & Opera
+        if (window.webkitRequestFileSystem) {
+          return void window.webkitRequestFileSystem(0, 0, off, on);
+        }
+        // Firefox
+        if ('MozAppearance' in document.documentElement.style) {
+          const db = indexedDB.open('test');
+          db.onerror = on;
+          db.onsuccess = off;
+          return void 0;
+        }
+        // Safari
+        if (/constructor/i.test(window.HTMLElement)) {
+          return testLocalStorage();
+        }
+        // IE10+ & Edge
+        if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
+          return on();
+        }
+        // others
+        return off();
+      });
+    };
+
+   </script>
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
@@ -175,7 +290,7 @@
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
-		<!-- <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div> -->
+    <!-- <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div> -->
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
@@ -187,69 +302,34 @@
     </div>
     <div style="clear: both;"></div>
     <script type='text/javascript'>
-      var Module = {
-        TOTAL_MEMORY: 268435456,
-        errorhandler: null,         // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
-        compatibilitycheck: null,
-        backgroundColor: "#808080",
-        splashStyle: "Light",
-        dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.data",
-        codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.js",
-        asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.asm.js",
-        memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.mem",
-      };
 
-      function isPrivateMode() {
-        return new Promise((resolve) => {
-          const on = () => resolve(true); // is in private mode
-          const off = () => resolve(false); // not private mode
-          const testLocalStorage = () => {
-            try {
-              if (localStorage.length) off();
-              else {
-                localStorage.x = 1;
-                localStorage.removeItem('x');
-                off();
-              }
-            } catch (e) {
-              // Safari only enables cookie in private mode
-              // if cookie is disabled then all client side storage is disabled
-              // if all client side storage is disabled, then there is no point
-              // in using private mode
-              navigator.cookieEnabled ? on() : off();
-            }
-          };
-          // Chrome & Opera
-          if (window.webkitRequestFileSystem) {
-            return void window.webkitRequestFileSystem(0, 0, off, on);
-          }
-          // Firefox
-          if ('MozAppearance' in document.documentElement.style) {
-            const db = indexedDB.open('test');
-            db.onerror = on;
-            db.onsuccess = off;
-            return void 0;
-          }
-          // Safari
-          if (/constructor/i.test(window.HTMLElement)) {
-            return testLocalStorage();
-          }
-          // IE10+ & Edge
-          if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
-            return on();
-          }
-          // others
-          return off();
+    function myCompatbilityCheck() {
+      CompatibilityCheck();
+      isPrivateMode().then(isPrivate => {
+        queryNutakuUser().then(user => {
+          var xmlHttp = new XMLHttpRequest();
+          var recordUrl = "http://aom18-sandbox.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+          xmlHttp.open("GET", recordUrl, true);
+          xmlHttp.send(null);
         });
-      }
+        if (isPrivate) {
+          window.alert("Please open this game in none private mode: " + r);
+          window.history.back();
+        }
 
-      isPrivateMode().then(r => {
-        console.log("it's priuvate mode");
-        var canvas = document.getElementById("canvas");
-        document.removeChild(canvas);
-        window.alret("Please open this game in none private mode");
       });
-
+    };
+    var Module = {
+      TOTAL_MEMORY: 268435456,
+      errorhandler: null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+      compatibilitycheck: myCompatbilityCheck,
+      backgroundColor: "#808080",
+      splashStyle: "Light",
+      dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.data",
+      codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.js",
+      asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.asm.js",
+      memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/aom-r18.mem",
+    }; 
     </script>
 
     <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestHot/UnityLoader.js"></script>
