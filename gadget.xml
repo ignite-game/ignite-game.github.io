@@ -206,6 +206,7 @@
         if (typeof displayName === 'string' || displayName instanceof String) {
           requestURL = requestURL + "?displayName=" + displayName;
         }
+        doSendRequest();
       } else {
         var req = opensocial.newDataRequest();
         req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
