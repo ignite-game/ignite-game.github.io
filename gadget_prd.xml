@@ -281,7 +281,7 @@
         isPrivateMode().then(isPrivate => {
           queryNutakuUser().then(user => {
             var xmlHttp = new XMLHttpRequest();
-            var recordUrl = "http://aom18-sandbox.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            var recordUrl = "http://aom18-prd.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
             xmlHttp.open("GET", recordUrl, true);
             xmlHttp.send(null);
           });
