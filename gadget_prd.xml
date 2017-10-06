@@ -124,44 +124,134 @@
         }, params);
       }
 
-      function sendLoginRequest(){
-        <!--console.log("sendLoginRequest");-->
+      var nutakuUser = null;
 
-        var req = opensocial.newDataRequest();
-        req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
-        req.send(function(response) {
-          var requestURL = "http://aom18-prd.ignite-ga.me/api/Player/loginById";
-          if (response.hadError()) {
-            // error
-          } else {
-            var item = response.get("viewer");
-            if (item.hadError()) {
+      function queryNutakuUser() {
+        console.log("query nutaku user");
+        if(nutakuUser != null){
+          return Promise.resolve(nutakuUser);
+        } else {
+          return new Promise((resolve, reject) => {
+            var req = opensocial.newDataRequest();
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.send(function(response) {
+              if (response.hadError()) {
+                window.alert("can not query user from api server");
+                reject("can not query user from api server");
+              } else {
+                var item = response.get("viewer");
+                if (item.hadError()) {
+                  window.alert("error for getting viewer in response");
+                  reject("error for getting viewer in response");
+                } else {
+                  nutakuUser = item.getData();
+                  resolve(nutakuUser)
+                }
+              }
+            });  
+          });
+        }
+      }
+
+
+      function sendLoginRequest() {
+        var requestURL = "http://aom18-prd.ignite-ga.me/api/Player/loginById";
+        function doSendRequest() {
+          var params = {};
+          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          gadgets.io.makeRequest(requestURL, function(obj) {
+            console.log("sendLoginRequest callback");
+            var responseObj = {
+              "Text": obj.text,
+              "Rc": obj.rc
+            };
+            SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
+          }, params);
+        }
+
+        if (nutakuUser != null) {
+          var id = nutakuUser.getId();
+          var displayName = nutakuUser.getDisplayName();
+          console.log("displayName: " + displayName);
+          if (typeof displayName === 'string' || displayName instanceof String) {
+            requestURL = requestURL + "?displayName=" + displayName;
+          }
+          doSendRequest();
+        } else {
+          var req = opensocial.newDataRequest();
+          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+          req.send(function(response) {
+            if (response.hadError()) {
               // error
             } else {
-              var viewer = item.getData();
-              var id = viewer.getId();
-              var displayName = viewer.getDisplayName();
-              <!--console.log("displayName: "+displayName);-->
-              if (typeof displayName === 'string' || displayName instanceof String) {
-                requestURL = requestURL + "?displayName="+displayName;
+              var item = response.get("viewer");
+              if (item.hadError()) {
+                // error
+              } else {
+                var viewer = item.getData();
+                var id = viewer.getId();
+                var displayName = viewer.getDisplayName();
+                console.log("displayName: " + displayName);
+                if (typeof displayName === 'string' || displayName instanceof String) {
+                  requestURL = requestURL + "?displayName=" + displayName;
+                }
               }
             }
-          }
-
-		  var params = {};
-		  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-		  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-		  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
-		  params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-		  gadgets.io.makeRequest(requestURL, function(obj) {
-			<!--console.log("sendLoginRequest callback");-->
-			var responseObj = {"Text": obj.text, "Rc": obj.rc};
-			SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
-		  }, params);
-        });
+            doSendRequest();
+          });
+        }
       }
 
       gadgets.util.registerOnLoadHandler(init);
+
+      function isPrivateMode() {
+        return new Promise((resolve) => {
+          const on = () => resolve(true); // is in private mode
+          const off = () => resolve(false); // not private mode
+          const testLocalStorage = () => {
+            try {
+              if (localStorage.length) off();
+              else {
+                localStorage.x = 1;
+                localStorage.removeItem('x');
+                off();
+              }
+            } catch (e) {
+              // Safari only enables cookie in private mode
+              // if cookie is disabled then all client side storage is disabled
+              // if all client side storage is disabled, then there is no point
+              // in using private mode
+              navigator.cookieEnabled ? on() : off();
+            }
+          };
+          // Chrome & Opera
+          if (window.webkitRequestFileSystem) {
+            return void window.webkitRequestFileSystem(0, 0, off, on);
+          }
+          // Firefox
+          if ('MozAppearance' in document.documentElement.style) {
+            const db = indexedDB.open('test');
+            db.onerror = on;
+            db.onsuccess = off;
+            return void 0;
+          }
+          // Safari
+          if (/constructor/i.test(window.HTMLElement)) {
+            return testLocalStorage();
+          }
+          // IE10+ & Edge
+          if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
+            return on();
+          }
+          // others
+          return off();
+        });
+      };
+
+
     </script>
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
@@ -186,6 +276,24 @@
     </div>
     <div style="clear: both;"></div>
     <script type='text/javascript'>
+      function myCompatbilityCheck() {
+        CompatibilityCheck();
+        isPrivateMode().then(isPrivate => {
+          queryNutakuUser().then(user => {
+            var xmlHttp = new XMLHttpRequest();
+            var recordUrl = "http://aom18-sandbox.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            xmlHttp.open("GET", recordUrl, true);
+            xmlHttp.send(null);
+          });
+          if (isPrivate) {
+            //window.alert("Please open this game in non-private mode" );
+            //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
+            //window.history.back();
+          }
+
+        });
+      };
+
       var Module = {
         TOTAL_MEMORY: 268435456,
         errorhandler: null,         // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
