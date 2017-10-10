@@ -314,8 +314,8 @@
           xmlHttp.send(null);
         });
         if (isPrivate) {
-          window.alert("Please open this game in non-private mode" );
-          window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
+          //window.alert("Please open this game in non-private mode" );
+          //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
           //window.history.back();
         }
 
