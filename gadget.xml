@@ -60,7 +60,7 @@
       itemParams[opensocial.BillingItem.Field.COUNT] = 1;
       itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
       itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
-      itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomcdn.ignite-ga.me/aom-r18/PurchasableItemData/" + jsonObj.Id + ".png";
+      itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/attack-on-moe-h/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
 
       var item = opensocial.newBillingItem(itemParams);
       var params = {};
@@ -282,23 +282,23 @@
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
-    <link rel="stylesheet" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/style.css">
-    <link rel="shortcut icon" href="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/favicon.ico" />
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/UnityProgress.js"></script>
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/TemplateData/favicon.ico" />
+    <script src="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/TemplateData/UnityProgress.js"></script>
     
-    <div style="background: url('http://aomcdn.ignite-ga.me/aom-r18/TemplateData/background003.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: url('https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 200px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
-        <!-- <div class="fullscreen"><img src="http://aomcdn.ignite-ga.me/aom-r18/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div> -->
+        <!-- <div class="fullscreen"><img src="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1); setAspectRatio();" /></div> -->
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
         <!-- <br>
         <div align="center">Server Maintenance : October 6th, 09:00-14:00(GMT)</div> -->
         <!-- <br>
-        <div align="center"><img src="http://aomcdn.ignite-ga.me/aom-r18/promot_girl_banC.jpg" width="480" height="120"/></div> -->
+        <div align="center"><img src="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/ad_banner/20171004_LichPrincess_S.png" width="480" height="120"/></div> -->
       </div>
     </div>
     <div style="clear: both;"></div>
@@ -327,14 +327,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Light",
-      dataUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAD6/aom-r18.data",
-      codeUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAD6/aom-r18.js",
-      asmUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAD6/aom-r18.asm.js",
-      memUrl: "http://aomcdn.ignite-ga.me/aom-r18/Release_TestAD6/aom-r18.mem",
+      dataUrl: "https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/Release_TestNewS3/aom-r18.data",
+      codeUrl: "https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/Release_TestNewS3/aom-r18.js",
+      asmUrl: "https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/Release_TestNewS3/aom-r18.asm.js",
+      memUrl: "https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/Release_TestNewS3/aom-r18.mem",
     }; 
     </script>
 
-    <script src="http://aomcdn.ignite-ga.me/aom-r18/Release_TestAD6/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/attack-on-moe-h/release/Release_TestNewS3/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
