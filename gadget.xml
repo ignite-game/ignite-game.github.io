@@ -327,7 +327,7 @@
       errorhandler: null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
-      splashStyle: "Light",
+      splashStyle: "Dark",
       dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestEvent6/aom-r18.data",
       codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestEvent6/aom-r18.js",
       asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestEvent6/aom-r18.asm.js",
