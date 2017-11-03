@@ -296,8 +296,8 @@
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
-        <!-- <br>
-        <div align="center" style="color: #FFFFFF">Server Maintenance : October 25th, 08:00-10:00(GMT)</div> -->
+        <br>
+        <div align="center" style="color: #FFFFFF">Server Maintenance : November 3th, 08:00-10:00(GMT)</div>
         <br>
         <div align="center"><img src="http://aomhcdn.ignite-ga.me/halloween/20171017_Halloween_Tips_2.png" width="690" height="303"/></div>
       </div>
@@ -321,7 +321,7 @@
         }
 
       });
-    };
+    }; 
     var Module = {
       TOTAL_MEMORY: 268435456,
       errorhandler: null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
