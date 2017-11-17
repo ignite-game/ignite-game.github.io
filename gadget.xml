@@ -327,14 +327,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Light",
-      dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestResize/aom-r18.data",
-      codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestResize/aom-r18.js",
-      asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestResize/aom-r18.asm.js",
-      memUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestResize/aom-r18.mem",
+      dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestBPEvent/aom-r18.data",
+      codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestBPEvent/aom-r18.js",
+      asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestBPEvent/aom-r18.asm.js",
+      memUrl: "http://aomhcdn.ignite-ga.me/release/Release_TestBPEvent/aom-r18.mem",
     }; 
     </script>
 
-    <script src="http://aomhcdn.ignite-ga.me/release/Release_TestResize/UnityLoader.js"></script>
+    <script src="http://aomhcdn.ignite-ga.me/release/Release_TestBPEvent/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
