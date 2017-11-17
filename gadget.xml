@@ -299,8 +299,8 @@
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
-        <br>
-        <div align="center" style="color: #FFFFFF">Server Maintenance : November 17th, 08:00-09:00(GMT)</div>
+        <!-- <br>
+        <div align="center" style="color: #FFFFFF">Server Maintenance : November 17th, 08:00-09:00(GMT)</div> -->
         <!-- <br>
         <div align="center"><img src="http://aomhcdn.ignite-ga.me/halloween/20171017_Halloween_Tips_2.png" width="690" height="303"/></div> -->
       </div>
