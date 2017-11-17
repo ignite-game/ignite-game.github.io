@@ -58,7 +58,10 @@
         itemParams[opensocial.BillingItem.Field.COUNT] = 1;
         itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
-        itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomhcdn.ignite-ga.me/purchasable_item_thumbnail/"+ jsonObj.Id + ".png";
+        if(jsonObj.Icon == "")
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+        else
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
         
         var item = opensocial.newBillingItem(itemParams); 
         var params = {};
