@@ -263,8 +263,9 @@
     <link rel="shortcut icon" href="http://aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="http://aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
     
-    <div style="background: url('http://aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; ">
-      <div style="width: 960px; padding-top: 200px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
+    <div style="background: url('http://aomhcdn.ignite-ga.me/event/201711/Blackpanther_bg2.jpg') no-repeat top center; width: 100%; "> 
+    <!-- <div style="background: url('http://aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
+      <div style="width: 960px; padding-top: 200px; padding-bottom: 16px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
@@ -273,8 +274,8 @@
         <br>
         <!-- <br>
         <div align="center" style="color: #FFFFFF">Server Maintenance : November 17th, 08:00-09:00(GMT)</div> -->
-        <!-- <br>
-        <div align="center"><img src="http://aomhcdn.ignite-ga.me/halloween/20171017_Halloween_Tips_2.png" width="690" height="303"/></div> -->
+        <br>
+        <div align="center"><img src="http://aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div>
       </div>
     </div>
     <div style="clear: both;"></div>
