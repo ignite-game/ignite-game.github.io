@@ -74,8 +74,8 @@
         if (response.hadError()) {
           // error 
           console.error('error when request payment');
-          // console.error(response);
-          // console.error(response.getData());
+          console.error(response);
+          console.error(response.getData());
           var errorJson = {}
           errorJson.errorCode = response.getErrorCode();
           errorJson.errorMessage = response.getErrorMessage();
@@ -90,6 +90,8 @@
           SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
         } else {
           console.log("requestPayment callback: success");
+          console.error(response);
+          console.error(response.getData());
           var payment = response.getData();
           var items = payment.getField('items');
           var paymentJson = {};
@@ -299,8 +301,8 @@
         <div class="fullscreen"></div>
         <div class="title"></div>
         <br>
-        <br>
-        <div align="center" style="color: #FFFFFF">Server Maintenance : January 4th, 08:00-11:00(GMT)</div>
+        <!-- <br>
+        <div align="center" style="color: #FFFFFF">Server Maintenance : January 4th, 08:00-11:00(GMT)</div> -->
         <!-- <br>
         <div align="center"><img src="http://aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div> -->
       </div>
