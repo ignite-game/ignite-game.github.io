@@ -74,8 +74,8 @@
         if (response.hadError()) {
           // error 
           console.error('error when request payment');
-          // console.error(response);
-          // console.error(response.getData());
+          console.error(response);
+          console.error(response.getData());
           var errorJson = {}
           errorJson.errorCode = response.getErrorCode();
           errorJson.errorMessage = response.getErrorMessage();
@@ -90,6 +90,8 @@
           SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
         } else {
           console.log("requestPayment callback: success");
+          console.error(response);
+          console.error(response.getData());
           var payment = response.getData();
           var items = payment.getField('items');
           var paymentJson = {};
