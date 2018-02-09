@@ -263,9 +263,9 @@
     <link rel="shortcut icon" href="http://aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="http://aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
     
-    <div style="background: #000000 url('http://aomhcdn.ignite-ga.me/event/201802/20180201_bg.jpg') no-repeat top center; width: 100%; "> 
+    <div style="background: #000000 url('http://aomhcdn.ignite-ga.me/event/201802/20180208_bg.jpg') no-repeat top center; width: 100%; "> 
     <!-- <div style="background: url('http://aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
-      <div style="width: 960px; padding-top: 200px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
+      <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
         <div class="logo"></div>
@@ -304,14 +304,14 @@
         compatibilitycheck: myCompatbilityCheck,
         backgroundColor: "#808080",
         splashStyle: "Dark",
-        dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_0/aom-r18.data",
-        codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_0/aom-r18.js",
-        asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_0/aom-r18.asm.js",
-        memUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_0/aom-r18.mem",
+        dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.data",
+        codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.js",
+        asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.asm.js",
+        memUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.mem",
       };
     </script>
 
-    <script src="http://aomhcdn.ignite-ga.me/release/Release_1_7_0/UnityLoader.js"></script>
+    <script src="http://aomhcdn.ignite-ga.me/release/Release_1_7_1/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
