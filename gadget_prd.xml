@@ -304,14 +304,14 @@
         compatibilitycheck: myCompatbilityCheck,
         backgroundColor: "#808080",
         splashStyle: "Dark",
-        dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.data",
-        codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.js",
-        asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.asm.js",
-        memUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_1/aom-r18.mem",
+        dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_2/aom-r18.data",
+        codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_2/aom-r18.js",
+        asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_2/aom-r18.asm.js",
+        memUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_2/aom-r18.mem",
       };
     </script>
 
-    <script src="http://aomhcdn.ignite-ga.me/release/Release_1_7_1/UnityLoader.js"></script>
+    <script src="http://aomhcdn.ignite-ga.me/release/Release_1_7_2/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
