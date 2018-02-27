@@ -186,6 +186,22 @@
       }
     };
 
+    function prompGuestRegisteration() {
+      var params = {};
+      var params = {};
+      params[nutaku.GuestRequestFields.VERSION] = 2; 
+      var guest = opensocial.newGuestSignUp(params);
+      opensocial.requestGuestSignUp(guest, function(response) {
+        // The callback processing will be executed after a user performs the action inside the signup modal.
+        // However, the callback processing won't be run if the user selects "sign up" since he will be directed to a signup page.
+      
+        if (!response.hadError()) {
+            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+            console.log(responseCode);
+        }
+       });
+    }
+
     function sendLoginRequest() {
       console.log("sendLoginRequest");
       var requestURL = "http://aom18-sandbox.ignite-ga.me/api/Player/loginById";
@@ -333,14 +349,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Dark",
-      dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_Sales/aom-r18.data",
-      codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_Sales/aom-r18.js",
-      asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_Sales/aom-r18.asm.js",
-      memUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_Sales/aom-r18.mem",
+      dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_GuestPlay/aom-r18.data",
+      codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_GuestPlay/aom-r18.js",
+      asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_GuestPlay/aom-r18.asm.js",
+      memUrl: "http://aomhcdn.ignite-ga.me/release/Release_Test_GuestPlay/aom-r18.mem",
     }; 
     </script>
 
-    <script src="http://aomhcdn.ignite-ga.me/release/Release_Test_Sales/UnityLoader.js"></script>
+    <script src="http://aomhcdn.ignite-ga.me/release/Release_Test_GuestPlay/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
