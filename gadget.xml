@@ -4,11 +4,10 @@
     <Require feature="opensocial-payment" /> 
     <Require feature="dynamic-height"/>
     <Require feature="nutaku" /> 
-    <Link rel="payment.handler" href="http://aom18-sandbox.ignite-ga.me/api/payment/handle" />
+    <Link rel="payment.handler" href="https://aom18-sandbox.ignite-ga.me/api/payment/handle" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
-    <script src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript">
     function init() {
       console.log('gadgets.util.registerOnLoadHandler called');
@@ -45,7 +44,7 @@
         id: 123456789
       });
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/payment/handle", function(obj) {}, params);
+      gadgets.io.makeRequest("https://aom18-sandbox.ignite-ga.me/api/payment/handle", function(obj) {}, params);
     }
 
     function requestPayment(object) {
@@ -122,7 +121,7 @@
         data: object
       });
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/setByClass?class_name=" + key, function(obj) {
+      gadgets.io.makeRequest("https://aom18-sandbox.ignite-ga.me/api/route/setByClass?class_name=" + key, function(obj) {
         console.log("sendSaveRequest callback: " + key);
         var responseObj = {
           "Text": obj.text,
@@ -143,7 +142,7 @@
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-      gadgets.io.makeRequest("http://aom18-sandbox.ignite-ga.me/api/route/getByClass?class_name=" + key, function(obj) {
+      gadgets.io.makeRequest("https://aom18-sandbox.ignite-ga.me/api/route/getByClass?class_name=" + key, function(obj) {
         console.log("sendGetRequest callback: " + key);
         var responseObj = {
           "Text": obj.text,
@@ -194,7 +193,7 @@
 
     function sendLoginRequest() {
       console.log("sendLoginRequest");
-      var requestURL = "http://aom18-sandbox.ignite-ga.me/api/Player/loginById";
+      var requestURL = "https://aom18-sandbox.ignite-ga.me/api/Player/loginById";
       function doSendRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -321,7 +320,7 @@
       isPrivateMode().then(isPrivate => {
         queryNutakuUser().then(user => {
           var xmlHttp = new XMLHttpRequest();
-          var recordUrl = "http://aom18-sandbox.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+          var recordUrl = "https://aom18-sandbox.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
           xmlHttp.open("GET", recordUrl, true);
           xmlHttp.send(null);
         });
