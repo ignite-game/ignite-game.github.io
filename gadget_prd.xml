@@ -4,11 +4,10 @@
     <Require feature="opensocial-payment" /> 
     <Require feature="dynamic-height"/>
     <Require feature="nutaku" /> 
-    <Link rel="payment.handler" href="http://aom18-prd.ignite-ga.me/api/payment/handle" />
+    <Link rel="payment.handler" href="https://aom18-prd.ignite-ga.me/api/payment/handle" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
-    <script src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript">
       function init() {
         <!--console.log('gadgets.util.registerOnLoadHandler called');-->
@@ -43,7 +42,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/payment/handle", function(obj) {}, params);
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/payment/handle", function(obj) {}, params);
       }
 
       function requestPayment(object) {
@@ -59,7 +58,7 @@
         itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
         if(jsonObj.Icon == "")
-          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
         else
           itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
         
@@ -104,7 +103,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
           <!--console.log("sendSaveRequest callback: "+key);-->
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
           var msg = {"Key" : key, "Ro" : responseObj}
@@ -119,7 +118,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("http://aom18-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
           <!--console.log("sendGetRequest callback: "+key);-->
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
           var msg = {"Key" : key, "Ro" : responseObj}
@@ -165,7 +164,7 @@
 
 
       function sendLoginRequest() {
-        var requestURL = "http://aom18-prd.ignite-ga.me/api/Player/loginById";
+        var requestURL = "https://aom18-prd.ignite-ga.me/api/Player/loginById";
         function doSendRequest() {
           var params = {};
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -266,11 +265,11 @@
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
-    <link rel="stylesheet" href="http://aomhcdn.ignite-ga.me/release/TemplateData/style.css">
-    <link rel="shortcut icon" href="http://aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
-    <script src="http://aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
-    <div style="background: #000000 url('http://aomhcdn.ignite-ga.me/event/201803/201803_bg.jpg') no-repeat top center; width: 100%; "> 
-    <!-- <div style="background: url('http://aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201803/201803_bg.jpg') no-repeat top center; width: 100%; "> 
+    <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
         <br>
@@ -281,7 +280,7 @@
         <!-- <br>
         <div align="center" style="color: #FFFFFF">Scheduled Server Maintenance : January 19th, 08:00-09:00(GMT)</div> -->
         <!-- <br>
-        <div align="center"><img src="http://aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div> -->
+        <div align="center"><img src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div> -->
       </div>
     </div>
     <div style="clear: both;"></div>
@@ -291,7 +290,7 @@
         isPrivateMode().then(isPrivate => {
           queryNutakuUser().then(user => {
             var xmlHttp = new XMLHttpRequest();
-            var recordUrl = "http://aom18-prd.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            var recordUrl = "https://aom18-prd.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
             xmlHttp.open("GET", recordUrl, true);
             xmlHttp.send(null);
           });
@@ -310,14 +309,14 @@
         compatibilitycheck: myCompatbilityCheck,
         backgroundColor: "#808080",
         splashStyle: "Dark",
-        dataUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_3/aom-r18.data",
-        codeUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_3/aom-r18.js",
-        asmUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_3/aom-r18.asm.js",
-        memUrl: "http://aomhcdn.ignite-ga.me/release/Release_1_7_3/aom-r18.mem",
+        dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_1_8_0/aom-r18.data",
+        codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_1_8_0/aom-r18.js",
+        asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_1_8_0/aom-r18.asm.js",
+        memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_1_8_0/aom-r18.mem",
       };
     </script>
 
-    <script src="http://aomhcdn.ignite-ga.me/release/Release_1_7_3/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_1_8_0/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
