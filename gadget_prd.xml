@@ -186,7 +186,8 @@
           var displayName = nutakuUser.getDisplayName();
           console.log("displayName: " + displayName);
           if (typeof displayName === 'string' || displayName instanceof String) {
-            requestURL = requestURL + "?displayName=" + displayName;
+						var version = "1.8.9";
+						requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
           }
           doSendRequest();
         } else {
