@@ -339,14 +339,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Dark",
-      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_10/aom-r18.data",
-      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_10/aom-r18.js",
-      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_10/aom-r18.asm.js",
-      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_10/aom-r18.mem",
+      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_11/aom-r18.data",
+      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_11/aom-r18.js",
+      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_11/aom-r18.asm.js",
+      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_11/aom-r18.mem",
     }; 
     </script>
 
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_10/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_11/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
