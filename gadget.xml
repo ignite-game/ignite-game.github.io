@@ -209,7 +209,7 @@
           SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
         }, params);
       };
-     	var version = "1.8.12";
+     	var version = "1.8.13";
       if (nutakuUser != null) {
         var id = nutakuUser.getId();
         var displayName = nutakuUser.getDisplayName();
@@ -297,7 +297,7 @@
     <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
 
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201804/2018-04-06_Moetan110.jpg') no-repeat top center; width: 100%; "> 
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201805/20180521_bg_mo111.jpg') no-repeat top center; width: 100%; "> 
     <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
@@ -339,14 +339,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Dark",
-      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_12/aom-r18.data",
-      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_12/aom-r18.js",
-      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_12/aom-r18.asm.js",
-      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_12/aom-r18.mem",
+      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_13_event_mo208/aom-r18.data",
+      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_13_event_mo208/aom-r18.js",
+      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_13_event_mo208/aom-r18.asm.js",
+      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_13_event_mo208/aom-r18.mem",
     }; 
     </script>
 
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_12/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_Test_v1_8_13_event_mo208/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
