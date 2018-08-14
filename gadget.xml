@@ -223,7 +223,8 @@
       if (nutakuUser != null) {
         var id = nutakuUser.getId();
         var displayName = nutakuUser.getDisplayName();
-        console.log("id: " + id + "; displayName: " + displayName);
+          console.log("id: " + id);
+          console.log("displayName: " + displayName);
         if (typeof displayName === 'string' || displayName instanceof String) {
           requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
         }
