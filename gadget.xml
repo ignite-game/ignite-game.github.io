@@ -68,6 +68,7 @@
       var params = {};
       params[opensocial.Payment.Field.ITEMS] = [item];
       params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT;
+      params[nutaku.GuestRequestFields.VERSION] = 3;
       var payment = opensocial.newPayment(params);
       opensocial.requestPayment(payment, function(response) {
         if (response.hadError()) {
@@ -184,11 +185,20 @@
         });
       }
     };
+
     //prompGuestRegisteration
     function prompGuestRegisteration() {
       var params = {};
+      params[nutaku.GuestRequestFields.VERSION] = 1;	// 1: Login Only; 2: Sign Up
       var guest = opensocial.newGuestSignUp(params);
-      opensocial.requestGuestSignUp(guest);
+      opensocial.requestGuestSignUp(guest, function(response) {
+      	if (!response.hadError()) {
+      		var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+      		console.log("prompGuestRegisteration: RESPONSE_CODE: " + responseCode);
+      	} else {
+      		console.log("prompGuestRegisteration: ERROR: " + JSON.stringify(response));
+      	}
+      });
     }
 
     function sendLoginRequest() {
