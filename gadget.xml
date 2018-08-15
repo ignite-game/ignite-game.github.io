@@ -186,19 +186,28 @@
       }
     };
 
-    //prompGuestRegisteration
-    function prompGuestRegisteration() {
+    //promptGuestRegistration
+    function promptGuestRegistration() {
       var params = {};
-      params[nutaku.GuestRequestFields.VERSION] = 1;	// 1: Login Only; 2: Sign Up
+      params[nutaku.GuestRequestFields.VERSION] = 1;  // 1: Login Only; 2: Sign Up
       var guest = opensocial.newGuestSignUp(params);
       opensocial.requestGuestSignUp(guest, function(response) {
-      	if (!response.hadError()) {
-      		var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
-      		console.log("prompGuestRegisteration: RESPONSE_CODE: " + responseCode);
-      	} else {
-      		console.log("prompGuestRegisteration: ERROR: " + JSON.stringify(response));
-      	}
+/*
+        if (!response.hadError()) {
+          var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+          console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
+          var responseObj = {"Text": responseCode, "Rc": response.rc};
+          SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+        } else {
+          console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
+          var responseObj = {"Text": response.Text, "Rc": response.rc};
+          SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+        }
+*/
+				console.log("requestGuestSignUp response: "+JSON.stringify(response));
       });
+      var responseObj = {"Text": "signup", "Rc": "200"};
+      SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
     }
 
     function sendLoginRequest() {
