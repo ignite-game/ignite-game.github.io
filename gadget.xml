@@ -317,7 +317,7 @@
     <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
 
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201809/bg_mo115.jpg') no-repeat top center; width: 100%; "> 
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201809/bg_mo115_212.jpg') no-repeat top center; width: 100%; "> 
     <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
