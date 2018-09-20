@@ -189,7 +189,7 @@
     //promptGuestRegistration
     function promptGuestRegistration() {
       var params = {};
-      params[nutaku.GuestRequestFields.VERSION] = 1;  // 1: Login Only; 2: Sign Up
+      params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
       var guest = opensocial.newGuestSignUp(params);
       opensocial.requestGuestSignUp(guest, function(response) {
 /*
