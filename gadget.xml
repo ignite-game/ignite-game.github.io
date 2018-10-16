@@ -228,7 +228,7 @@
           SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
         }, params);
       };
-     	var version = "1.8.22";
+     	var version = "1.8.24";
       if (nutakuUser != null) {
         var id = nutakuUser.getId();
         var displayName = nutakuUser.getDisplayName();
@@ -359,14 +359,14 @@
       compatibilitycheck: myCompatbilityCheck,
       backgroundColor: "#808080",
       splashStyle: "Dark",
-      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_22/aom-r18.data",
-      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_22/aom-r18.js",
-      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_22/aom-r18.asm.js",
-      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_22/aom-r18.mem",
+      dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_24/aom-r18.data",
+      codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_24/aom-r18.js",
+      asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_24/aom-r18.asm.js",
+      memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_24/aom-r18.mem",
     }; 
     </script>
 
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_22/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_1_8_24/UnityLoader.js"></script>
     ]]>
   </Content>
 </Module >
