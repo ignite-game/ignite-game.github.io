@@ -1,5 +1,5 @@
 <Module>
-  <ModulePrefs title= " Nutaku Test ">
+  <ModulePrefs title= "Attack on Moe H">
     <Require feature="opensocial-0.8" /> 
     <Require feature="opensocial-payment" /> 
     <Require feature="dynamic-height"/>
@@ -51,12 +51,11 @@
         var jsonObj = JSON.parse(object);
 
         itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
-
         itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
-
         itemParams[opensocial.BillingItem.Field.COUNT] = 1;
         itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
+
         if(jsonObj.Icon == "")
           itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
         else
@@ -175,7 +174,6 @@
         });
       }
 
-
       function sendLoginRequest() {
         var requestURL = "https://aom18-prd.ignite-ga.me/api/Player/loginById";
         function doSendRequest() {
@@ -201,7 +199,7 @@
           console.log("id: " + id);
           console.log("displayName: " + displayName);
           if (typeof displayName === 'string' || displayName instanceof String) {
-                        requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+            requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
           }
           doSendRequest();
         } else {
@@ -220,7 +218,7 @@
                 var displayName = viewer.getDisplayName();
                 console.log("displayName: " + displayName);
                 if (typeof displayName === 'string' || displayName instanceof String) {
-                                    requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+                  requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
                 }
               }
             }
@@ -274,15 +272,15 @@
           return off();
         });
       };
-
-
     </script>
+
     <!--button onclick="makeSignedRequest()">Make Signed Request</button>
     <button onclick="requestPayment()">Request Payment</button-->
     
     <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
+
     <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201901/bg_mo119.jpg') no-repeat top center; width: 100%; "> 
     <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
@@ -314,13 +312,11 @@
             //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
             //window.history.back();
           }
-
         });
       };
-
       var Module = {
         TOTAL_MEMORY: 536870912,
-        errorhandler: null,         // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+        errorhandler: null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
         compatibilitycheck: myCompatbilityCheck,
         backgroundColor: "#808080",
         splashStyle: "Dark",
