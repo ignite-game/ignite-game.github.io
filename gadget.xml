@@ -14,6 +14,96 @@
 
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_3_0_0/UnityLoader.js"></script>
     <script type="text/javascript">
+      var nutakuUser = null;
+      var gameInstance = UnityLoader.instantiate("gameContainer",
+                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_3_0_0/aom-r18.json",
+                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+
+      // ===== Nutaku Login =====
+
+      function sendLoginRequest() {
+        var requestURL = "https://aom18-sandbox.ignite-ga.me/api/Player/loginById";
+        function doSendRequest() {
+          var params = {};
+          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          gadgets.io.makeRequest(requestURL, function(obj) {
+            console.log("sendLoginRequest callback");
+            var responseObj = {
+              "Text": obj.text,
+              "Rc": obj.rc
+            };
+            gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
+          }, params);
+        };
+        var version = "3.0.0";
+        if (nutakuUser != null) {
+          var id = nutakuUser.getId();
+          var displayName = nutakuUser.getDisplayName();
+            console.log("id: " + id);
+            console.log("displayName: " + displayName);
+          if (typeof displayName === 'string' || displayName instanceof String) {
+            requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+          }
+          doSendRequest();
+        } else {
+          var req = opensocial.newDataRequest();
+          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+          req.send(function(response) {
+            if (response.hadError()) {
+              // error
+            } else {
+              var item = response.get("viewer");
+              if (item.hadError()) {
+                // error
+              } else {
+                var viewer = item.getData();
+                var id = viewer.getId();
+                var displayName = viewer.getDisplayName();
+                console.log("displayName: " + displayName);
+                if (typeof displayName === 'string' || displayName instanceof String) {
+                  requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+                }
+              }
+            }
+            doSendRequest();
+          });
+        };
+      }
+
+      //promptGuestRegistration
+      function promptGuestRegistration() {
+        var params = {};
+        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
+        var guest = opensocial.newGuestSignUp(params);
+        opensocial.requestGuestSignUp(guest, function(response) {
+/*
+          if (!response.hadError()) {
+            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+            console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
+            var responseObj = {"Text": responseCode, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          } else {
+            console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
+            var responseObj = {"Text": response.Text, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          }
+*/
+          console.log("requestGuestSignUp response: "+JSON.stringify(response));
+        });
+        var responseObj = {"Text": "signup", "Rc": "200"};
+        gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+      }
+
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+        gadgets.window.adjustHeight();
+      }
+
+      // ===== Checks =====
+
       function myCompatbilityCheck() {
         CompatibilityCheck();
         isPrivateMode().then(isPrivate => {
@@ -31,14 +121,78 @@
         });
       }; 
 
-      var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_3_0_0/aom-r18.json",
-                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+      function isPrivateMode() {
+        return new Promise((resolve) => {
+          const on = () => resolve(true); // is in private mode
+          const off = () => resolve(false); // not private mode
+          const testLocalStorage = () => {
+            try {
+              if (localStorage.length) off();
+              else {
+                localStorage.x = 1;
+                localStorage.removeItem('x');
+                off();
+              }
+            } catch (e) {
+              // Safari only enables cookie in private mode
+              // if cookie is disabled then all client side storage is disabled
+              // if all client side storage is disabled, then there is no point
+              // in using private mode
+              navigator.cookieEnabled ? on() : off();
+            }
+          };
+          // Chrome & Opera
+          if (window.webkitRequestFileSystem) {
+            return void window.webkitRequestFileSystem(0, 0, off, on);
+          }
+          // Firefox
+          if ('MozAppearance' in document.documentElement.style) {
+            const db = indexedDB.open('test');
+            db.onerror = on;
+            db.onsuccess = off;
+            return void 0;
+          }
+          // Safari
+          if (/constructor/i.test(window.HTMLElement)) {
+            return testLocalStorage();
+          }
+          // IE10+ & Edge
+          if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
+            return on();
+          }
+          // others
+          return off();
+        });
+      };
 
-      function init() {
-        console.log('gadgets.util.registerOnLoadHandler called');
-        gadgets.window.adjustHeight();
-      }
+      function queryNutakuUser() {
+        console.log("query nutaku user");
+        if(nutakuUser != null){
+          return Promise.resolve(nutakuUser);
+        } else {
+          return new Promise((resolve, reject) => {
+            var req = opensocial.newDataRequest();
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.send(function(response) {
+              if (response.hadError()) {
+                window.alert("can not query user from api server");
+                reject("can not query user from api server");
+              } else {
+                var item = response.get("viewer");
+                if (item.hadError()) {
+                  window.alert("error for getting viewer in response");
+                  reject("error for getting viewer in response");
+                } else {
+                  nutakuUser = item.getData();
+                  resolve(nutakuUser)
+                }
+              }
+            });  
+          });
+        }
+      };
+
+      // ===== Resize =====
 
       function doChangeAspecRatio() {
         var ca = document.getElementById("canvas");
@@ -62,6 +216,9 @@
         document.addEventListener("fullscreenchange", doChangeAspecRatio, false);
       }
 
+      // ===== APIs for Unity =====
+
+/*
       function makeSignedRequest() {
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
@@ -70,7 +227,7 @@
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         gadgets.io.makeRequest("https://aom18-sandbox.ignite-ga.me/api/payment/handle", function(obj) {}, params);
       }
-
+*/
       function requestPayment(object) {
         //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
         var itemParams = {};
@@ -154,156 +311,7 @@
         }, params);
       }
 
-      var nutakuUser = null;
-
-      function queryNutakuUser() {
-        console.log("query nutaku user");
-        if(nutakuUser != null){
-          return Promise.resolve(nutakuUser);
-        } else {
-          return new Promise((resolve, reject) => {
-            var req = opensocial.newDataRequest();
-            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
-            req.send(function(response) {
-              if (response.hadError()) {
-                window.alert("can not query user from api server");
-                reject("can not query user from api server");
-              } else {
-                var item = response.get("viewer");
-                if (item.hadError()) {
-                  window.alert("error for getting viewer in response");
-                  reject("error for getting viewer in response");
-                } else {
-                  nutakuUser = item.getData();
-                  resolve(nutakuUser)
-                }
-              }
-            });  
-          });
-        }
-      };
-
-      //promptGuestRegistration
-      function promptGuestRegistration() {
-        var params = {};
-        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
-        var guest = opensocial.newGuestSignUp(params);
-        opensocial.requestGuestSignUp(guest, function(response) {
-/*
-          if (!response.hadError()) {
-            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
-            console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
-            var responseObj = {"Text": responseCode, "Rc": response.rc};
-            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-          } else {
-            console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
-            var responseObj = {"Text": response.Text, "Rc": response.rc};
-            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-          }
-*/
-          console.log("requestGuestSignUp response: "+JSON.stringify(response));
-        });
-        var responseObj = {"Text": "signup", "Rc": "200"};
-        gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-      }
-
-      function sendLoginRequest() {
-        var requestURL = "https://aom18-sandbox.ignite-ga.me/api/Player/loginById";
-        function doSendRequest() {
-          var params = {};
-          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-          params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
-          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-          gadgets.io.makeRequest(requestURL, function(obj) {
-            console.log("sendLoginRequest callback");
-            var responseObj = {
-              "Text": obj.text,
-              "Rc": obj.rc
-            };
-            gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
-          }, params);
-        };
-        var version = "3.0.0";
-        if (nutakuUser != null) {
-          var id = nutakuUser.getId();
-          var displayName = nutakuUser.getDisplayName();
-            console.log("id: " + id);
-            console.log("displayName: " + displayName);
-          if (typeof displayName === 'string' || displayName instanceof String) {
-            requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
-          }
-          doSendRequest();
-        } else {
-          var req = opensocial.newDataRequest();
-          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
-          req.send(function(response) {
-            if (response.hadError()) {
-              // error
-            } else {
-              var item = response.get("viewer");
-              if (item.hadError()) {
-                // error
-              } else {
-                var viewer = item.getData();
-                var id = viewer.getId();
-                var displayName = viewer.getDisplayName();
-                console.log("displayName: " + displayName);
-                if (typeof displayName === 'string' || displayName instanceof String) {
-                  requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
-                }
-              }
-            }
-            doSendRequest();
-          });
-        };
-      }
-
       gadgets.util.registerOnLoadHandler(init);
-
-      function isPrivateMode() {
-        return new Promise((resolve) => {
-          const on = () => resolve(true); // is in private mode
-          const off = () => resolve(false); // not private mode
-          const testLocalStorage = () => {
-            try {
-              if (localStorage.length) off();
-              else {
-                localStorage.x = 1;
-                localStorage.removeItem('x');
-                off();
-              }
-            } catch (e) {
-              // Safari only enables cookie in private mode
-              // if cookie is disabled then all client side storage is disabled
-              // if all client side storage is disabled, then there is no point
-              // in using private mode
-              navigator.cookieEnabled ? on() : off();
-            }
-          };
-          // Chrome & Opera
-          if (window.webkitRequestFileSystem) {
-            return void window.webkitRequestFileSystem(0, 0, off, on);
-          }
-          // Firefox
-          if ('MozAppearance' in document.documentElement.style) {
-            const db = indexedDB.open('test');
-            db.onerror = on;
-            db.onsuccess = off;
-            return void 0;
-          }
-          // Safari
-          if (/constructor/i.test(window.HTMLElement)) {
-            return testLocalStorage();
-          }
-          // IE10+ & Edge
-          if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
-            return on();
-          }
-          // others
-          return off();
-        });
-      };
     </script>
 
     <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201901/bg_mo119_217.jpg') no-repeat top center; width: 100%; ">
