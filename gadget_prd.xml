@@ -280,6 +280,8 @@
     <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js"></script>
 
     <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201902/bg_mo120.jpg') no-repeat top center; width: 100%; "> 
     <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
@@ -295,6 +297,11 @@
         <!-- <br>
         <div align="center"><img src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div> -->
       </div>
+    </div>
+    <div style="width:960px; margin: auto; position: relative;">
+      <a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
+        <img class="logoPic" width="118px" src="https://cdn-publishing.nutaku.net/support_tool/media/logo_cst_400x400_1.png" />
+      </a>
     </div>
     <div style="clear: both;"></div>
     <script type='text/javascript'>
