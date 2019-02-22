@@ -8,171 +8,19 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/style.css">
+    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/favicon.ico" />
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/UnityProgress.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_3_0_1/UnityLoader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js"></script>
     <script type="text/javascript">
-      function init() {
-        <!--console.log('gadgets.util.registerOnLoadHandler called');-->
-        gadgets.window.adjustHeight();
-      }
-
-      function doChangeAspecRatio() {
-        var ca = document.getElementById("canvas");
-        var r = ca.width / ca.height;
-        if (r > 1.5) {
-          ca.width = ca.height * 1.5;
-        } else {
-          ca.height = ca.width / 1.5;
-        }
-      }
-
-      function setAspectRatio() {
-        var ca = document.getElementById("canvas");
-        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
-        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
-        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
-        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
-        document.addEventListener("fullscreenchange", doChangeAspecRatio, false); 
-      }
-
-      function makeSignedRequest() {
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/payment/handle", function(obj) {}, params);
-      }
-
-      function requestPayment(object) {
-      //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
-        var itemParams = {};
-        var jsonObj = JSON.parse(object);
-
-        itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
-        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
-        itemParams[opensocial.BillingItem.Field.COUNT] = 1;
-        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
-        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
-
-        if(jsonObj.Icon == "")
-          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
-        else
-          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
-        
-        var item = opensocial.newBillingItem(itemParams); 
-        var params = {};
-        params[opensocial.Payment.Field.ITEMS] = [item];
-        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT; 
-        params[nutaku.GuestRequestFields.VERSION] = 3;
-        var payment = opensocial.newPayment(params); 
-        opensocial.requestPayment(payment, function(response) { 
-          if (response.hadError()) { 
-            // error 
-            <!--console.error('error when request payment');-->
-            // console.error(response);
-            // console.error(response.getData());
-            var errorJson = {}
-            errorJson.errorCode = response.getErrorCode();
-            errorJson.errorMessage = response.getErrorMessage();
-            var responseObj = {"Text": JSON.stringify(errorJson) , "Rc": 200};
-            var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
-            SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
-          } else { 
-            <!--console.log("requestPayment callback: success");-->
-            var payment = response.getData();
-            var items = payment.getField('items');
-            var paymentJson = {};
-            paymentJson.Id = items[0].fields_.skuId;
-            paymentJson.ItemName = items[0].fields_.name;
-            paymentJson.ItemDesc = items[0].fields_.description;
-            paymentJson.Price = items[0].fields_.price;
-            paymentJson.ResponseMsg = payment.getField('responseCode');
-            var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
-            var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
-            SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
-          } 
-        });
-      }
-      
-      function sendSaveRequest(key, object){
-        <!--console.log("sendSaveRequest: "+key);-->
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
-          <!--console.log("sendSaveRequest callback: "+key);-->
-          var responseObj = {"Text": obj.text, "Rc": obj.rc};
-          var msg = {"Key" : key, "Ro" : responseObj}
-          SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
-        }, params);
-      }
-      
-      function sendGetRequest(key){
-        <!--console.log("sendGetRequest: "+key);-->
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
-        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
-          <!--console.log("sendGetRequest callback: "+key);-->
-          var responseObj = {"Text": obj.text, "Rc": obj.rc};
-          var msg = {"Key" : key, "Ro" : responseObj}
-          SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
-        }, params);
-      }
-
       var nutakuUser = null;
+      var gameInstance = UnityLoader.instantiate("gameContainer",
+                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_3_0_1/aom-r18.json",
+                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
 
-      function queryNutakuUser() {
-        console.log("query nutaku user");
-        if(nutakuUser != null){
-          return Promise.resolve(nutakuUser);
-        } else {
-          return new Promise((resolve, reject) => {
-            var req = opensocial.newDataRequest();
-            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
-            req.send(function(response) {
-              if (response.hadError()) {
-                window.alert("can not query user from api server");
-                reject("can not query user from api server");
-              } else {
-                var item = response.get("viewer");
-                if (item.hadError()) {
-                  window.alert("error for getting viewer in response");
-                  reject("error for getting viewer in response");
-                } else {
-                  nutakuUser = item.getData();
-                  resolve(nutakuUser)
-                }
-              }
-            });  
-          });
-        }
-      }
-
-      //promptGuestRegistration
-      function promptGuestRegistration() {
-        var params = {};
-        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
-        var guest = opensocial.newGuestSignUp(params);
-        opensocial.requestGuestSignUp(guest, function(response) {
-          if (!response.hadError()) {
-            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
-            console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
-            var responseObj = {"Text": responseCode, "Rc": response.rc};
-            SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-          } else {
-            console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
-            var responseObj = {"Text": response.Text, "Rc": response.rc};
-            SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-          }
-        });
-      }
+      // ===== Nutaku Login =====
 
       function sendLoginRequest() {
         var requestURL = "https://aom18-prd.ignite-ga.me/api/Player/loginById";
@@ -188,11 +36,10 @@
               "Text": obj.text,
               "Rc": obj.rc
             };
-            SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
+            gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
           }, params);
         }
-
-        var version = "2.0.5.1";
+        var version = "3.0.1";
         if (nutakuUser != null) {
           var id = nutakuUser.getId();
           var displayName = nutakuUser.getDisplayName();
@@ -227,7 +74,48 @@
         }
       }
 
-      gadgets.util.registerOnLoadHandler(init);
+      //promptGuestRegistration
+      function promptGuestRegistration() {
+        var params = {};
+        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
+        var guest = opensocial.newGuestSignUp(params);
+        opensocial.requestGuestSignUp(guest, function(response) {
+          if (!response.hadError()) {
+            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+            console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
+            var responseObj = {"Text": responseCode, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          } else {
+            console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
+            var responseObj = {"Text": response.Text, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          }
+        });
+      }
+
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+        gadgets.window.adjustHeight();
+      }
+
+      // ===== Checks =====
+
+      function myCompatbilityCheck() {
+        CompatibilityCheck();
+        isPrivateMode().then(isPrivate => {
+          queryNutakuUser().then(user => {
+            var xmlHttp = new XMLHttpRequest();
+            var recordUrl = "https://aom18-prd.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            xmlHttp.open("GET", recordUrl, true);
+            xmlHttp.send(null);
+          });
+          if (isPrivate) {
+            //window.alert("Please open this game in non-private mode" );
+            //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
+            //window.history.back();
+          }
+        });
+      }; 
 
       function isPrivateMode() {
         return new Promise((resolve) => {
@@ -272,62 +160,167 @@
           return off();
         });
       };
-    </script>
 
-    <!--button onclick="makeSignedRequest()">Make Signed Request</button>
-    <button onclick="requestPayment()">Request Payment</button-->
-    
-    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/style.css">
-    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/favicon.ico" />
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/UnityProgress.js"></script>
-
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201901/bg_mo119_217.jpg') no-repeat top center; width: 100%; "> 
-    <!-- <div style="background: url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData/background003.jpg') no-repeat top center; width: 100%; "> -->
-      <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="640px" width="960px"></canvas>
-        <br>
-        <div class="logo"></div>
-        <div class="fullscreen"></div>
-        <div class="title"></div>
-        <br>
-        <!-- <br>
-        <div align="center" style="color: #FFFFFF">Scheduled Server Maintenance : January 19th, 08:00-09:00(GMT)</div> -->
-        <!-- <br>
-        <div align="center"><img src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201711/20171117_Blackpanther_Tips.png" width="694" height="275"/></div> -->
-      </div>
-    </div>
-    <div style="clear: both;"></div>
-    <script type='text/javascript'>
-      function myCompatbilityCheck() {
-        CompatibilityCheck();
-        isPrivateMode().then(isPrivate => {
-          queryNutakuUser().then(user => {
-            var xmlHttp = new XMLHttpRequest();
-            var recordUrl = "https://aom18-prd.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
-            xmlHttp.open("GET", recordUrl, true);
-            xmlHttp.send(null);
+      function queryNutakuUser() {
+        console.log("query nutaku user");
+        if(nutakuUser != null){
+          return Promise.resolve(nutakuUser);
+        } else {
+          return new Promise((resolve, reject) => {
+            var req = opensocial.newDataRequest();
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.send(function(response) {
+              if (response.hadError()) {
+                window.alert("can not query user from api server");
+                reject("can not query user from api server");
+              } else {
+                var item = response.get("viewer");
+                if (item.hadError()) {
+                  window.alert("error for getting viewer in response");
+                  reject("error for getting viewer in response");
+                } else {
+                  nutakuUser = item.getData();
+                  resolve(nutakuUser)
+                }
+              }
+            });  
           });
-          if (isPrivate) {
-            //window.alert("Please open this game in non-private mode" );
-            //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
-            //window.history.back();
+        }
+      };
+
+      // ===== Resize =====
+
+      function doChangeAspecRatio() {
+        var ca = document.getElementById("canvas");
+        var r = ca.width / ca.height;
+        if (r > 1.5) {
+          ca.width = ca.height * 1.5;
+        } else {
+          ca.height = ca.width / 1.5;
+        }
+      }
+
+      function setAspectRatio() {
+        var ca = document.getElementById("canvas");
+        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+      }
+
+      // ===== APIs for Unity =====
+
+/*
+      function makeSignedRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/payment/handle", function(obj) {}, params);
+      }
+*/
+      function requestPayment(object) {
+        //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
+        var itemParams = {};
+        var jsonObj = JSON.parse(object);
+
+        itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
+        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
+        itemParams[opensocial.BillingItem.Field.COUNT] = 1;
+        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
+        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
+
+        if(jsonObj.Icon == "")
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+        else
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
+
+        var item = opensocial.newBillingItem(itemParams);
+        var params = {};
+        params[opensocial.Payment.Field.ITEMS] = [item];
+        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT;
+        params[nutaku.GuestRequestFields.VERSION] = 3;
+        var payment = opensocial.newPayment(params);
+        opensocial.requestPayment(payment, function(response) {
+          if (response.hadError()) {
+            // error 
+            <!--console.error('error when request payment');-->
+            // console.error(response);
+            // console.error(response.getData());
+            var errorJson = {}
+            errorJson.errorCode = response.getErrorCode();
+            errorJson.errorMessage = response.getErrorMessage();
+            var responseObj = {"Text": JSON.stringify(errorJson) , "Rc": 200};
+            var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
+            gameInstance.SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
+          } else {
+            <!--console.log("requestPayment callback: success");-->
+            var payment = response.getData();
+            var items = payment.getField('items');
+            var paymentJson = {};
+            paymentJson.Id = items[0].fields_.skuId;
+            paymentJson.ItemName = items[0].fields_.name;
+            paymentJson.ItemDesc = items[0].fields_.description;
+            paymentJson.Price = items[0].fields_.price;
+            paymentJson.ResponseMsg = payment.getField('responseCode');
+            var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
+            var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
+            gameInstance.SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
           }
         });
-      };
-      var Module = {
-        TOTAL_MEMORY: 536870912,
-        errorhandler: null, // arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
-        compatibilitycheck: myCompatbilityCheck,
-        backgroundColor: "#808080",
-        splashStyle: "Dark",
-        dataUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_2_0_5_1/aom-r18.data",
-        codeUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_2_0_5_1/aom-r18.js",
-        asmUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_2_0_5_1/aom-r18.asm.js",
-        memUrl: "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_2_0_5_1/aom-r18.mem",
-      };
+      }
+
+      function sendSaveRequest(key, object){
+        <!--console.log("sendSaveRequest: "+key);-->
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
+          <!--console.log("sendSaveRequest callback: "+key);-->
+          var responseObj = {"Text": obj.text, "Rc": obj.rc};
+          var msg = {"Key" : key, "Ro" : responseObj}
+          gameInstance.SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+        }, params);
+      }
+      
+      function sendGetRequest(key){
+        <!--console.log("sendGetRequest: "+key);-->
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
+          <!--console.log("sendGetRequest callback: "+key);-->
+          var responseObj = {"Text": obj.text, "Rc": obj.rc};
+          var msg = {"Key" : key, "Ro" : responseObj}
+          gameInstance.SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+        }, params);
+      }
+
+      gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_2_0_5_1/UnityLoader.js"></script>
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201902/bg_mo120.jpg') no-repeat top center; width: 100%; ">
+      <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
+        <div class="webgl-content">
+          <div id="gameContainer" style="width: 960px; height: 640px"></div>
+        </div>
+      </div>
+    </div>
+    <div style="width:960px; margin: auto; position: relative;">
+      <a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
+        <img class="logoPic" width="118px" src="https://cdn-publishing.nutaku.net/support_tool/media/logo_cst_400x400_1.png" />
+      </a>
+    </div>
+    <div style="clear: both;"></div>
     ]]>
   </Content>
 </Module >
