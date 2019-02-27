@@ -320,12 +320,12 @@
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
         </div>
+				<div style="width:800px; margin: auto; padding-top: 10px; position: relative;">
+					<a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
+						<img class="logoPic" width="64px" src="https://cdn-publishing.nutaku.net/support_tool/media/logo_cst_400x400_1.png" />
+					</a>
+				</div>
       </div>
-    </div>
-    <div style="width:960px; margin: auto; position: relative;">
-      <a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
-        <img class="logoPic" width="118px" src="https://cdn-publishing.nutaku.net/support_tool/media/logo_cst_400x400_1.png" />
-      </a>
     </div>
     <div style="clear: both;"></div>
     ]]>
