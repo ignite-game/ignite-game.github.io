@@ -8,16 +8,16 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
-    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/style.css">
-    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/favicon.ico" />
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/TemplateData2/UnityProgress.js"></script>
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_3_2_0/UnityLoader.js"></script>
+    <link rel="stylesheet" href="http://cdn.ignite-ga.me/aomh/TemplateData/style.css">
+    <link rel="shortcut icon" href="http://cdn.ignite-ga.me/aomh/TemplateData/favicon.ico" />
+    <script src="http://cdn.ignite-ga.me/aomh/TemplateData/UnityProgress.js"></script>
+    <script src="http://cdn.ignite-ga.me/aomh/release_sandbox/Release_3_2_0/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js" onload="Support.isUnity=true;"></script>
     <script type="text/javascript">
       var nutakuUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release/Release_sandbox_3_2_0/aom-r18.json",
+                                                 "http://cdn.ignite-ga.me/aomh/release_sandbox/Release_3_2_0/aom-r18.json",
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
 
       // ===== Nutaku Login =====
@@ -241,7 +241,7 @@
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
 
         if(jsonObj.Icon == "")
-          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "http://cdn.ignite-ga.me/aomh/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
         else
           itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
 
@@ -315,7 +315,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/event/201904/bg_mo122.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: #000000 url('http://cdn.ignite-ga.me/aomh/image/event/201904/bg_mo122.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
