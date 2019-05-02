@@ -315,7 +315,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://cdn.ignite-ga.me/aomh/image/event/201904/bg_mo122_220.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: #000000 url('https://cdn.ignite-ga.me/aomh/image/event/201905/bg_mo128.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
