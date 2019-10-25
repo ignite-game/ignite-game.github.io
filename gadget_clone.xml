@@ -1,0 +1,395 @@
+<Module>
+  <ModulePrefs title= "Attack on Moe H (Sandbox Clone)">
+    <Require feature="opensocial-0.8" /> 
+    <Require feature="opensocial-payment" /> 
+    <Require feature="dynamic-height"/>
+    <Require feature="nutaku" /> 
+    <Link rel="payment.handler" href="https://aom18-server-uat2.herokuapp.com/api/payment/handle" />
+  </ModulePrefs>
+  <Content type="html" view="canvas" preferred_width="1260">
+    <![CDATA[
+    <link rel="stylesheet" href="https://cdn.ignite-ga.me/aomh/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://cdn.ignite-ga.me/aomh/TemplateData/favicon.ico" />
+    <script src="https://cdn.ignite-ga.me/aomh/TemplateData/UnityProgress.js"></script>
+    <script src="https://cdn.ignite-ga.me/aomh/release_sandbox/Release_3_10_0_B/UnityLoader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js" onload="Support.isUnity=true;"></script>
+    <script async src="https://cdn-cross-promotions.nutaku.net/lib/crosspromo-sbox.js" onload="crossPromo.init('ep46w6OOGFSnVPT')"></script>
+    <script type="text/javascript">
+      var urlParams = new URLSearchParams(window.location.search);
+      var viewparams = urlParams.get('view-params');
+      viewparams = viewparams ? JSON.parse(viewparams) : null;
+//      console.log("NutakuCrossPromo: viewparams: "+viewparams);
+      var campaign_id = viewparams ? viewparams.campaign_id : null;
+      var token = viewparams ? viewparams.token : null;
+//      console.log("NutakuCrossPromo: campaign_id: "+campaign_id+"; token: "+token);
+
+      var nutakuUser = null;
+      var gameInstance = UnityLoader.instantiate("gameContainer",
+                                                 "https://cdn.ignite-ga.me/aomh/release_sandbox/Release_3_10_0_B/aom-r18.json",
+                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+
+      // ===== Nutaku Login =====
+
+      function sendLoginRequest() {
+        var requestURL = "https://aom18-server-uat2.herokuapp.com/api/Player/loginById";
+        function doSendRequest() {
+          var params = {};
+          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          gadgets.io.makeRequest(requestURL, function(obj) {
+            console.log("sendLoginRequest callback");
+            var responseObj = {
+              "Text": obj.text,
+              "Rc": obj.rc
+            };
+            gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
+          }, params);
+        };
+        var version = "3.10.0";
+        if (nutakuUser != null) {
+          var id = nutakuUser.getId();
+          var displayName = nutakuUser.getDisplayName();
+          console.log("id: " + id);
+          console.log("displayName: " + displayName);
+          if (typeof displayName === 'string' || displayName instanceof String) {
+            requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+          }
+          if (campaign_id && token) {
+            requestURL = requestURL + "&campaign_id=" + campaign_id + "&token="+token;
+          }
+          doSendRequest();
+        } else {
+          var req = opensocial.newDataRequest();
+          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+          req.send(function(response) {
+            if (response.hadError()) {
+              // error
+            } else {
+              var item = response.get("viewer");
+              if (item.hadError()) {
+                // error
+              } else {
+                var viewer = item.getData();
+                var id = viewer.getId();
+                var displayName = viewer.getDisplayName();
+                console.log("displayName: " + displayName);
+                if (typeof displayName === 'string' || displayName instanceof String) {
+                  requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+                }
+                if (campaign_id && token) {
+                  requestURL = requestURL + "&campaign_id=" + campaign_id + "&token="+token;
+                }
+              }
+            }
+            doSendRequest();
+          });
+        };
+      }
+
+      //promptGuestRegistration
+      function promptGuestRegistration() {
+        var params = {};
+        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
+        var guest = opensocial.newGuestSignUp(params);
+        opensocial.requestGuestSignUp(guest, function(response) {
+/*
+          if (!response.hadError()) {
+            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+            console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
+            var responseObj = {"Text": responseCode, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          } else {
+            console.log("promptGuestRegistration: ERROR: " + JSON.stringify(response));
+            var responseObj = {"Text": response.Text, "Rc": response.rc};
+            gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+          }
+*/
+          console.log("requestGuestSignUp response: "+JSON.stringify(response));
+        });
+        var responseObj = {"Text": "signup", "Rc": "200"};
+        gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
+      }
+
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+        gadgets.window.adjustHeight();
+      }
+
+      // ===== Checks =====
+
+      function myCompatbilityCheck() {
+        CompatibilityCheck();
+        isPrivateMode().then(isPrivate => {
+          queryNutakuUser().then(user => {
+            var xmlHttp = new XMLHttpRequest();
+            var recordUrl = "https://aom18-server-uat2.herokuapp.com/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            xmlHttp.open("GET", recordUrl, true);
+            xmlHttp.send(null);
+          });
+          if (isPrivate) {
+            //window.alert("Please open this game in non-private mode" );
+            //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
+            //window.history.back();
+          }
+        });
+      }; 
+
+      function isPrivateMode() {
+        return new Promise((resolve) => {
+          const on = () => resolve(true); // is in private mode
+          const off = () => resolve(false); // not private mode
+          const testLocalStorage = () => {
+            try {
+              if (localStorage.length) off();
+              else {
+                localStorage.x = 1;
+                localStorage.removeItem('x');
+                off();
+              }
+            } catch (e) {
+              // Safari only enables cookie in private mode
+              // if cookie is disabled then all client side storage is disabled
+              // if all client side storage is disabled, then there is no point
+              // in using private mode
+              navigator.cookieEnabled ? on() : off();
+            }
+          };
+          // Chrome & Opera
+          if (window.webkitRequestFileSystem) {
+            return void window.webkitRequestFileSystem(0, 0, off, on);
+          }
+          // Firefox
+          if ('MozAppearance' in document.documentElement.style) {
+            const db = indexedDB.open('test');
+            db.onerror = on;
+            db.onsuccess = off;
+            return void 0;
+          }
+          // Safari
+          if (/constructor/i.test(window.HTMLElement)) {
+            return testLocalStorage();
+          }
+          // IE10+ & Edge
+          if (!window.indexedDB && (window.PointerEvent || window.MSPointerEvent)) {
+            return on();
+          }
+          // others
+          return off();
+        });
+      };
+
+      function queryNutakuUser() {
+        console.log("query nutaku user");
+        if(nutakuUser != null){
+          return Promise.resolve(nutakuUser);
+        } else {
+          return new Promise((resolve, reject) => {
+            var req = opensocial.newDataRequest();
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.send(function(response) {
+              if (response.hadError()) {
+                window.alert("can not query user from api server");
+                reject("can not query user from api server");
+              } else {
+                var item = response.get("viewer");
+                if (item.hadError()) {
+                  window.alert("error for getting viewer in response");
+                  reject("error for getting viewer in response");
+                } else {
+                  nutakuUser = item.getData();
+                  resolve(nutakuUser)
+                }
+              }
+            });  
+          });
+        }
+      };
+
+      // ===== Resize =====
+
+      function doChangeAspecRatio() {
+        var ca = document.getElementById("canvas");
+        var r = ca.width / ca.height;
+        if (r > 1.5) {
+          ca.width = ca.height * 1.5;
+        } else {
+          ca.height = ca.width / 1.5;
+        }
+      }
+
+      function setAspectRatio() {
+        var ca = document.getElementById("canvas");
+        ca.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        ca.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("mozfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("MSFullscreenChange", doChangeAspecRatio, false);
+        document.addEventListener("webkitfullscreenchange", doChangeAspecRatio, false);
+        document.addEventListener("fullscreenchange", doChangeAspecRatio, false);
+      }
+
+      // ===== APIs for Unity =====
+
+/*
+      function makeSignedRequest() {
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-server-uat2.herokuapp.com/api/payment/handle", function(obj) {}, params);
+      }
+*/
+      function requestPayment(object) {
+        //var object = '{\"Id\":\"diamonds_500\",\"ItemName\":\"500 Gems\",\"ItemDesc\":\"11% More Gems\",\"Price\":500.0}';
+        var itemParams = {};
+        var jsonObj = JSON.parse(object);
+
+        itemParams[opensocial.BillingItem.Field.SKU_ID] = jsonObj.Id;
+        itemParams[opensocial.BillingItem.Field.PRICE] = jsonObj.Price;
+        itemParams[opensocial.BillingItem.Field.COUNT] = 1;
+        itemParams[opensocial.BillingItem.Field.DESCRIPTION] = jsonObj.ItemDesc;
+        itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
+
+        if(jsonObj.Icon == "")
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://cdn.ignite-ga.me/aomh/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+        else
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
+
+        var item = opensocial.newBillingItem(itemParams);
+        var params = {};
+        params[opensocial.Payment.Field.ITEMS] = [item];
+        params[opensocial.Payment.Field.PAYMENT_TYPE] = opensocial.Payment.PaymentType.PAYMENT;
+        params[nutaku.GuestRequestFields.VERSION] = 3;
+        var payment = opensocial.newPayment(params);
+        opensocial.requestPayment(payment, function(response) {
+          if (response.hadError()) {
+            // error 
+            console.error('error when request payment');
+            console.error(response);
+            console.error(response.getData());
+            var errorJson = {}
+            errorJson.errorCode = response.getErrorCode();
+            errorJson.errorMessage = response.getErrorMessage();
+            var responseObj = {"Text": JSON.stringify(errorJson) , "Rc": 200};
+            var msg = {"Key" : "paymentResponseError", "Ro" : responseObj}
+            gameInstance.SendMessage("WebGLResponse", "paymentResponseError", JSON.stringify(msg));
+          } else {
+            console.log("requestPayment callback: success");
+            console.error(response);
+            console.error(response.getData());
+            var payment = response.getData();
+            var items = payment.getField('items');
+            var paymentJson = {};
+            paymentJson.Id = items[0].fields_.skuId;
+            paymentJson.ItemName = items[0].fields_.name;
+            paymentJson.ItemDesc = items[0].fields_.description;
+            paymentJson.Price = items[0].fields_.price;
+            paymentJson.ResponseMsg = payment.getField('responseCode');
+            var responseObj = {"Text": JSON.stringify(paymentJson), "Rc": 200};
+            var msg = {"Key" : "paymentResponseSuccess", "Ro" : responseObj}
+            gameInstance.SendMessage("WebGLResponse", "paymentResponseSuccess", JSON.stringify(msg));
+          }
+        });
+      }
+
+      function sendSaveRequest(key, object) {
+        console.log("sendSaveRequet: " + key);
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-server-uat2.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
+          console.log("sendSaveRequest callback: " + key);
+          var responseObj = {"Text": obj.text, "Rc": obj.rc};
+          var msg = {"Key" : key, "Ro" : responseObj}
+          gameInstance.SendMessage("WebGLResponse", "saveResponse", JSON.stringify(msg));
+        }, params);
+      }
+
+      function sendGetRequest(key) {
+        console.log("sendGetRequet: " + key);
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+        params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        gadgets.io.makeRequest("https://aom18-server-uat2.herokuapp.com/api/route/getByClass?class_name="+key, function(obj) {
+          console.log("sendGetRequest callback: " + key);
+          var responseObj = {"Text": obj.text, "Rc": obj.rc};
+          var msg = {"Key" : key, "Ro" : responseObj}
+          gameInstance.SendMessage("WebGLResponse", "loadResponse", JSON.stringify(msg));
+        }, params);
+      }
+
+      // ===== Nutaku Cross Promo =====
+
+      function crossPromoRecord() {
+        console.log("crossPromoRecord:");
+        crossPromo.record(function(obj) {
+          var res = JSON.stringify(obj);
+          console.log("crossPromoRecord callback: "+res);
+          gameInstance.SendMessage("WebGLResponse", "crossPromoRecordResponse", res);
+        });
+      }
+
+      function crossPromoGetBanner() {
+        console.log("crossPromoGetBanner:");
+        crossPromo.getBanner(function(obj) {
+          var res = JSON.stringify(obj);
+          console.log("crossPromoGetBanner callback: "+res);
+          gameInstance.SendMessage("WebGLResponse", "crossPromoGetBannerResponse", res);
+        });
+      }
+
+      function crossPromoShowBannerModal() {
+        console.log("crossPromoShowBannerModal:");
+        crossPromo.showBannerModal(function(obj) {
+          var res = JSON.stringify(obj);
+          console.log("crossPromoShowBannerModal callback: "+res);
+          gameInstance.SendMessage("WebGLResponse", "crossPromoShowBannerModalResponse", res);
+        });
+      }
+
+      function crossPromoAchieveTask(key) {
+        console.log("crossPromoAchieveTask: "+key);
+        crossPromo.achieveTask(key, function(obj) {
+          var res = JSON.stringify(obj);
+          console.log("crossPromoAchieveTask callback: "+res);
+          gameInstance.SendMessage("WebGLResponse", "crossPromoAchieveTaskResponse", res);
+        });
+      }
+
+      function crossPromoConfirmTask(key) {
+        console.log("crossPromoConfirmTask: "+key);
+        crossPromo.confirmTask(key, function(obj) {
+          var res = JSON.stringify(obj);
+          console.log("crossPromoConfirmTask callback: "+res);
+          gameInstance.SendMessage("WebGLResponse", "crossPromoConfirmTaskResponse", res);
+        });
+      }
+
+      gadgets.util.registerOnLoadHandler(init);
+    </script>
+
+    <div style="background: #000000 url('https://cdn.ignite-ga.me/aomh/image/event/201910/bg_mo129.jpg') no-repeat top center; width: 100%; ">
+      <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
+        <div class="webgl-content">
+          <div id="gameContainer" style="width: 960px; height: 640px"></div>
+        </div>
+        <div style="width:980px; margin-top: -64px; position: relative;">
+          <a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
+            <img class="logoPic" width="64px" src="https://cdn-publishing.nutaku.net/support_tool/media/logo_cst_400x400_1.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div style="clear: both;"></div>
+    ]]>
+  </Content>
+</Module >
