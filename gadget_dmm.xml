@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://cdn.ignite-ga.me/aomh/TemplateData/style.css">
     <link rel="shortcut icon" href="https://cdn.ignite-ga.me/aomh/TemplateData/favicon.ico" />
     <script src="https://cdn.ignite-ga.me/aomh/TemplateData/UnityProgress.js"></script>
-    <script src="https://cdn.ignite-ga.me/aomh/release_sandbox/Release_4_0_0/UnityLoader.js"></script>
+    <script src="https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_4_0_0/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var dmmUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://cdn.ignite-ga.me/aomh/release_sandbox/Release_4_0_0/aom-r18.json",
+                                                 "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_4_0_0/aom-r18.json",
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
 
       // ===== DMM Login =====
