@@ -15,6 +15,24 @@
     <script src="https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_4_0_0/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
+      var waitForEl = function(selector, callback) {
+        if ($(selector).length) {
+          callback();
+        } else {
+          setTimeout(function() {
+            waitForEl(selector, callback);
+          }, 100);
+        }
+      };
+
+      var progressLogoBaseURL = "https://cdn.ignite-ga.me/aomh/TemplateData/";
+      var progressLogoImages = ["LoadingScreen_DMM.jpg"];
+      var progressLogoImage = progressLogoBaseURL + progressLogoImages[Math.floor(Math.random() * progressLogoImages.length)];
+      waitForEl(".webgl-content .logo", function() {
+//        console.log("progressLogoImage: "+progressLogoImage);
+        $(".webgl-content .logo").css("background-image", "url('"+progressLogoImage+"')");
+      });
+
       var dmmUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
                                                  "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_4_0_0/aom-r18.json",

@@ -24,6 +24,24 @@
       var token = viewparams ? viewparams.token : null;
 //      console.log("NutakuCrossPromo: campaign_id: "+campaign_id+"; token: "+token);
 
+      var waitForEl = function(selector, callback) {
+        if ($(selector).length) {
+          callback();
+        } else {
+          setTimeout(function() {
+            waitForEl(selector, callback);
+          }, 100);
+        }
+      };
+
+      var progressLogoBaseURL = "https://cdn.ignite-ga.me/aomh/TemplateData/";
+      var progressLogoImages = ["LoadingScreen_Nutaku.jpg","progressLogo.Light.png"];
+      var progressLogoImage = progressLogoBaseURL + progressLogoImages[Math.floor(Math.random() * progressLogoImages.length)];
+      waitForEl(".webgl-content .logo", function() {
+//        console.log("progressLogoImage: "+progressLogoImage);
+        $(".webgl-content .logo").css("background-image", "url('"+progressLogoImage+"')");
+      });
+
       var nutakuUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
                                                  "https://cdn.ignite-ga.me/aomh/release_sandbox/Release_3_8_4_heroku/aom-r18.json",
