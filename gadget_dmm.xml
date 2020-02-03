@@ -6,6 +6,10 @@
     <Require feature="dynamic-height"/>
     <Require feature="dmm" /> 
     <Link rel="payment.handler" href="https://aomh-dmm-server-uat.herokuapp.com/api/payment/handle" />
+		<Link rel="event.addapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/addapp" method="POST" />
+		<Link rel="event.suspendapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/suspendapp" method="GET" />
+		<Link rel="event.resumeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/resumeapp" method="GET" />
+		<Link rel="event.removeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/removeapp" method="GET" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
