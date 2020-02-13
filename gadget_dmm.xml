@@ -62,38 +62,17 @@
           }, params);
         };
         var version = "0.0.2";
-        if (dmmUser != null) {
-          var id = dmmUser.getId();
-          var displayName = dmmUser.getDisplayName();
-          console.log("id: " + id);
-          console.log("displayName: " + displayName);
+        queryDmmUser().then(user => {
+          var id = user.getId();
+          var displayName = user.getDisplayName();
+          var userType = user.getField(dmm.Person.Field.USER_TYPE);
+          var hasApp = user.getField(opensocial.Person.Field.HAS_APP);
+		  console.log("["+id+"] Logging in '"+displayName+"' ("+userType+") hasApp? "+hasApp);
           if (typeof displayName === 'string' || displayName instanceof String) {
             requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
           }
           doSendRequest();
-        } else {
-          var req = opensocial.newDataRequest();
-          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
-          req.send(function(response) {
-            if (response.hadError()) {
-              // error
-            } else {
-              var item = response.get("viewer");
-              if (item.hadError()) {
-                // error
-              } else {
-                var viewer = item.getData();
-                var id = viewer.getId();
-                var displayName = viewer.getDisplayName();
-                console.log("displayName: " + displayName);
-                if (typeof displayName === 'string' || displayName instanceof String) {
-                  requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
-                }
-              }
-            }
-            doSendRequest();
-          });
-        };
+        });
       }
 
       //promptGuestRegistration
@@ -194,8 +173,22 @@
           return Promise.resolve(dmmUser);
         } else {
           return new Promise((resolve, reject) => {
+            var params = {};
+            params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [
+              opensocial.Person.Field.ID,
+              opensocial.Person.Field.NICKNAME,
+              opensocial.Person.Field.PROFILE_URL,
+              opensocial.Person.Field.THUMBNAIL_URL,
+              opensocial.Person.Field.ABOUT_ME,
+              opensocial.Person.Field.ADDRESS,
+              opensocial.Person.Field.AGE,
+              opensocial.Person.Field.DATE_OF_BIRTH,
+              opensocial.Person.Field.HAS_APP,
+              dmm.Person.Field.BLOOD_TYPE,
+              dmm.Person.Field.USER_TYPE
+			];
             var req = opensocial.newDataRequest();
-            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER, params), "viewer");
             req.send(function(response) {
               if (response.hadError()) {
                 window.alert("can not query user from api server");
@@ -207,7 +200,7 @@
                   reject("error for getting viewer in response");
                 } else {
                   dmmUser = item.getData();
-                  resolve(dmmUser)
+                  resolve(dmmUser);
                 }
               }
             });  
