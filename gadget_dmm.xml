@@ -6,10 +6,10 @@
     <Require feature="dynamic-height"/>
     <Require feature="dmm" /> 
     <Link rel="payment.handler" href="https://aomh-dmm-server-uat.herokuapp.com/api/payment/handle" />
-		<Link rel="event.addapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/addapp" method="POST" />
-		<Link rel="event.suspendapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/suspendapp" method="GET" />
-		<Link rel="event.resumeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/resumeapp" method="GET" />
-		<Link rel="event.removeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/removeapp" method="GET" />
+    <Link rel="event.addapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/addapp" method="POST" />
+    <Link rel="event.suspendapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/suspendapp" method="GET" />
+    <Link rel="event.resumeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/resumeapp" method="GET" />
+    <Link rel="event.removeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/removeapp" method="GET" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
@@ -19,6 +19,9 @@
     <script src="https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_0_0_2/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
+      var version = "0.0.2";
+      var isIOS = (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) && !window.MSStream;
+
       var waitForEl = function(selector, callback) {
         if ($(selector).length) {
           callback();
@@ -38,9 +41,64 @@
       });
 
       var dmmUser = null;
-      var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_0_0_2/aom-r18.json",
-                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+      var gameInstance = null;
+//       var gameInstance = UnityLoader.instantiate("gameContainer",
+//                                                  "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_0_0_2/aom-r18.json",
+//                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+      function init() {
+        console.log('gadgets.util.registerOnLoadHandler called');
+        preRegChecking();
+        gadgets.window.adjustHeight();
+      }
+
+      // ===== User Separation =====
+
+      function preRegChecking() {
+        console.log("PreReg Checking...");
+        var requestURL = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/loginById";
+        function doSendRequest() {
+          var params = {};
+          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
+          params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          gadgets.io.makeRequest(requestURL, function(obj) {
+            console.log("PreReg Login callback:");
+            console.log(obj);
+          }, params);
+        };
+        queryDmmUser().then(user => {
+          var id = user.getId();
+          var displayName = user.getDisplayName();
+          var userType = user.getField(dmm.Person.Field.USER_TYPE);
+          var hasApp = user.getField(opensocial.Person.Field.HAS_APP);
+          console.log("["+id+"] PreReg Checking '"+displayName+"' ("+userType+") hasApp? "+hasApp);
+
+          if (userType == "developer" || userType == "staff") {
+            console.log("[preRegChecking] Developer Entry Point..." );
+            gameInstance = UnityLoader.instantiate("gameContainer",
+                                                   "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_0_0_2/aom-r18.json",
+                                                   {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+          } else {
+            if (hasApp) {
+              console.log("[preRegChecking] Developer Entry Point..." );
+              window.alert("Already Registered" );
+              //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
+            } else {
+            // Send "login/prereg" api to server
+//              if (typeof displayName === 'string' || displayName instanceof String) {
+//              requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+//              }
+//              doSendRequest();
+              if (isIOS) {
+                window.alert("Device Not Supported." );
+              } else {
+                window.alert("Thank You." );
+              }
+            }
+          }
+        });
+      }
 
       // ===== DMM Login =====
 
@@ -61,13 +119,12 @@
             gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
           }, params);
         };
-        var version = "0.0.2";
         queryDmmUser().then(user => {
           var id = user.getId();
           var displayName = user.getDisplayName();
           var userType = user.getField(dmm.Person.Field.USER_TYPE);
           var hasApp = user.getField(opensocial.Person.Field.HAS_APP);
-		  console.log("["+id+"] Logging in '"+displayName+"' ("+userType+") hasApp? "+hasApp);
+          console.log("["+id+"] Logging in '"+displayName+"' ("+userType+") hasApp? "+hasApp);
           if (typeof displayName === 'string' || displayName instanceof String) {
             requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
           }
@@ -97,11 +154,6 @@
         });
         var responseObj = {"Text": "signup", "Rc": "200"};
         gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
-      }
-
-      function init() {
-        console.log('gadgets.util.registerOnLoadHandler called');
-        gadgets.window.adjustHeight();
       }
 
       // ===== Checks =====
@@ -186,7 +238,7 @@
               opensocial.Person.Field.HAS_APP,
               dmm.Person.Field.BLOOD_TYPE,
               dmm.Person.Field.USER_TYPE
-			];
+      ];
             var req = opensocial.newDataRequest();
             req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER, params), "viewer");
             req.send(function(response) {
