@@ -99,12 +99,12 @@
       //promptGuestRegistration
       function promptGuestRegistration() {
         var params = {};
-        params[nutaku.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
+        params[dmm.GuestRequestFields.VERSION] = 2;  // 1: Login Only; 2: Sign Up
         var guest = opensocial.newGuestSignUp(params);
         opensocial.requestGuestSignUp(guest, function(response) {
 /*
           if (!response.hadError()) {
-            var responseCode = guest.getField(nutaku.Guest.Field.RESPONSE_CODE);
+            var responseCode = guest.getField(dmm.Guest.Field.RESPONSE_CODE);
             console.log("promptGuestRegistration: RESPONSE_CODE: " + responseCode);
             var responseObj = {"Text": responseCode, "Rc": response.rc};
             gameInstance.SendMessage("WebGLResponse", "guestRegistrationResponse", JSON.stringify(responseObj));
