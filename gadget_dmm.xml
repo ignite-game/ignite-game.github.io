@@ -21,6 +21,7 @@
     <script type="text/javascript">
       var version = "0.0.2";
       var isIOS = (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) && !window.MSStream;
+      var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
       var waitForEl = function(selector, callback) {
         if ($(selector).length) {
@@ -81,19 +82,35 @@
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
             if (hasApp) {
-              console.log("[preRegChecking] Developer Entry Point..." );
+              console.log("[preRegChecking] Player Already Registered" );
               window.alert("Already Registered" );
-              //window.location = "https://www.nutaku.net/games/attack-on-moe-h/";
-            } else {
-            // Send "login/prereg" api to server
-//              if (typeof displayName === 'string' || displayName instanceof String) {
-//              requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
-//              }
-//              doSendRequest();
-              if (isIOS) {
-                window.alert("Device Not Supported." );
+              if (isMobile) {
+                window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_sp.html";
               } else {
+                window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_pc.html";
+              }
+            } else {
+              // Send "login/prereg" api to server
+//              if (typeof displayName === 'string' || displayName instanceof String) {
+//                requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+//               }
+//               doSendRequest();
+              if (isIOS) {
+                console.log("[preRegChecking] Device Not Supported" );
+                window.alert("Device Not Supported." );
+                if (isMobile) {
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/error_sp.html";
+                } else {
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/error_pc.html";
+                }
+              } else {
+                console.log("[preRegChecking] Registered" );
                 window.alert("Thank You." );
+                if (isMobile) {
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_sp.html";
+                } else {
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_pc.html";
+                }
               }
             }
           }
