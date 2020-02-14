@@ -11,7 +11,7 @@
     <Link rel="event.resumeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/resumeapp" method="GET" />
     <Link rel="event.removeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/removeapp" method="GET" />
   </ModulePrefs>
-  <Content type="html" view="canvas" preferred_width="1260">
+  <Content type="html" view="canvas" preferred_width="1280">
     <![CDATA[
     <link rel="stylesheet" href="https://cdn.ignite-ga.me/aomh/TemplateData/style.css">
     <link rel="shortcut icon" href="https://cdn.ignite-ga.me/aomh/TemplateData/favicon.ico" />
@@ -381,7 +381,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://cdn.ignite-ga.me/aomh_dmm/image/background01.jpg') no-repeat top center; width: 100%; ">
+    <div id="gameTop" style="background: #FFFFFF url('https://cdn.ignite-ga.me/aomh_dmm/image/background02.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
