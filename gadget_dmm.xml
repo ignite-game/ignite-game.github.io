@@ -83,7 +83,6 @@
           } else {
             if (hasApp) {
               console.log("[preRegChecking] Player Already Registered" );
-              window.alert("Already Registered" );
               if (isMobile) {
                 window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_sp.html";
               } else {
@@ -91,13 +90,12 @@
               }
             } else {
               // Send "login/prereg" api to server
-//              if (typeof displayName === 'string' || displayName instanceof String) {
-//                requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
-//               }
-//               doSendRequest();
+              if (typeof displayName === 'string' || displayName instanceof String) {
+                requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+              }
+              doSendRequest();
               if (isIOS) {
                 console.log("[preRegChecking] Device Not Supported" );
-                window.alert("Device Not Supported." );
                 if (isMobile) {
                   window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/error_sp.html";
                 } else {
@@ -105,7 +103,6 @@
                 }
               } else {
                 console.log("[preRegChecking] Registered" );
-                window.alert("Thank You." );
                 if (isMobile) {
                   window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_sp.html?imid="+id;
                 } else {
