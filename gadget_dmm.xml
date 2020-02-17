@@ -107,9 +107,9 @@
                 console.log("[preRegChecking] Registered" );
                 window.alert("Thank You." );
                 if (isMobile) {
-                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_sp.html";
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_sp.html?imid="+id;
                 } else {
-                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_pc.html";
+                  window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_pc.html?imid="+id;
                 }
               }
             }
