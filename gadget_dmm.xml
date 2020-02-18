@@ -56,7 +56,7 @@
 
       function preRegChecking() {
         console.log("PreReg Checking...");
-        var requestURL = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/loginById";
+        var requestURL = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/preRegById";
         function doSendRequest() {
           var params = {};
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -91,7 +91,7 @@
             } else {
               // Send "login/prereg" api to server
               if (typeof displayName === 'string' || displayName instanceof String) {
-                requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
+                requestURL = requestURL + "?displayName=" + displayName;
               }
               doSendRequest();
               if (isIOS) {
