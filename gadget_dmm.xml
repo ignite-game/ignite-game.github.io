@@ -81,14 +81,14 @@
                                                    "https://cdn.ignite-ga.me/aomh_dmm/release_sandbox/Release_0_0_2/aom-r18.json",
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
-            if (hasApp) {
-              console.log("[preRegChecking] Player Already Registered" );
-              if (isMobile) {
-                window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_sp.html";
-              } else {
-                window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_pc.html";
-              }
-            } else {
+//             if (hasApp) {  // NB: this seems to always be true, so ignore for now
+//               console.log("[preRegChecking] Player Already Registered" );
+//               if (isMobile) {
+//                 window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_sp.html";
+//               } else {
+//                 window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/already_pc.html";
+//               }
+//             } else {
               // Send "login/prereg" api to server
               if (typeof displayName === 'string' || displayName instanceof String) {
                 requestURL = requestURL + "?displayName=" + displayName;
@@ -109,7 +109,7 @@
                   window.location = "https://cdn.ignite-ga.me/aomh_dmm/pre_reg/thankyou_pc.html?imid="+id;
                 }
               }
-            }
+//             }
           }
         });
       }
