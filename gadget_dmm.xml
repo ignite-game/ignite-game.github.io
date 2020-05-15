@@ -79,6 +79,7 @@
             params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
             params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
             params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+            params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
             gadgets.io.makeRequest(requestURL, function(obj) {
               console.log("PreReg Login callback:");
               console.log(obj);
@@ -127,6 +128,7 @@
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
           params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+          params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
           gadgets.io.makeRequest(requestURL, function(obj) {
             console.log("sendLoginRequest callback");
             var responseObj = {
@@ -310,6 +312,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/payment/handle", function(obj) {}, params);
       }
 */
@@ -372,6 +375,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
           console.log("sendSaveRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
@@ -387,6 +391,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/route/getByClass?class_name="+key, function(obj) {
           console.log("sendGetRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
