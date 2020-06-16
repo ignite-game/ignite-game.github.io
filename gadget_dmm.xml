@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="https://aomhjcdn.ignite-ga.me/TemplateData/style.css">
     <link rel="shortcut icon" href="https://aomhjcdn.ignite-ga.me/TemplateData/favicon.ico" />
     <script src="https://aomhjcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_1/UnityLoader.js"></script>
+    <script src="https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_2/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-      var version = "0.0.6.1";
+      var version = "0.0.6.2";
       var isIOS = (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) && !window.MSStream;
       var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
@@ -44,7 +44,7 @@
       var dmmUser = null;
       var gameInstance = null;
 //       var gameInstance = UnityLoader.instantiate("gameContainer",
-//                                                  "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_1/aom-r18.json",
+//                                                  "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_2/aom-r18.json",
 //                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
@@ -66,7 +66,7 @@
           if (userType == "developer" || userType == "staff") {
             console.log("[preRegChecking] Developer Entry Point..." );
             gameInstance = UnityLoader.instantiate("gameContainer",
-                                                   "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_1/aom-r18.json",
+                                                   "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_2/aom-r18.json",
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
             // Send "login/prereg" api to server
