@@ -5,11 +5,11 @@
     <Require feature="opensocial-payment" /> 
     <Require feature="dynamic-height"/>
     <Require feature="dmm" /> 
-    <Link rel="payment.handler" href="https://aomh-dmm-server-uat.herokuapp.com/api/payment/handle" />
-    <Link rel="event.addapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/addapp" method="POST" />
-    <Link rel="event.suspendapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/suspendapp" method="GET" />
-    <Link rel="event.resumeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/resumeapp" method="GET" />
-    <Link rel="event.removeapp" href="https://aomh-dmm-server-uat.herokuapp.com/api/platform/removeapp" method="GET" />
+    <Link rel="payment.handler" href="https://aomhj-uat.ignite-ga.me/api/payment/handle" />
+    <Link rel="event.addapp" href="https://aomhj-uat.ignite-ga.me/api/platform/addapp" method="POST" />
+    <Link rel="event.suspendapp" href="https://aomhj-uat.ignite-ga.me/api/platform/suspendapp" method="GET" />
+    <Link rel="event.resumeapp" href="https://aomhj-uat.ignite-ga.me/api/platform/resumeapp" method="GET" />
+    <Link rel="event.removeapp" href="https://aomhj-uat.ignite-ga.me/api/platform/removeapp" method="GET" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1280">
     <![CDATA[
@@ -70,7 +70,7 @@
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
             // Send "login/prereg" api to server
-            var requestURL = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/preRegById";
+            var requestURL = "https://aomhj-uat.ignite-ga.me/api/Player/preRegById";
             if (typeof displayName === 'string' || displayName instanceof String) {
               requestURL = requestURL + "?displayName=" + displayName;
             }
@@ -121,7 +121,7 @@
       // ===== DMM Login =====
 
       function sendLoginRequest() {
-        var requestURL = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/loginById";
+        var requestURL = "https://aomhj-uat.ignite-ga.me/api/Player/loginById";
         function doSendRequest() {
           var params = {};
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -182,7 +182,7 @@
         isPrivateMode().then(isPrivate => {
           queryDmmUser().then(user => {
             var xmlHttp = new XMLHttpRequest();
-            var recordUrl = "https://aomh-dmm-server-uat.herokuapp.com/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
+            var recordUrl = "https://aomhj-uat.ignite-ga.me/api/Player/recordPlayMode?playerId=" + user.getId() + "&inPrivateMode="+isPrivate;
             xmlHttp.open("GET", recordUrl, true);
             xmlHttp.send(null);
           });
@@ -313,7 +313,7 @@
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
-        gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/payment/handle", function(obj) {}, params);
+        gadgets.io.makeRequest("https://aomhj-uat.ignite-ga.me/api/payment/handle", function(obj) {}, params);
       }
 */
       function requestPayment(object) {
@@ -376,7 +376,7 @@
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
-        gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/route/setByClass?class_name="+key, function(obj) {
+        gadgets.io.makeRequest("https://aomhj-uat.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
           console.log("sendSaveRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
           var msg = {"Key" : key, "Ro" : responseObj}
@@ -392,7 +392,7 @@
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
         params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
-        gadgets.io.makeRequest("https://aomh-dmm-server-uat.herokuapp.com/api/route/getByClass?class_name="+key, function(obj) {
+        gadgets.io.makeRequest("https://aomhj-uat.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
           console.log("sendGetRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
           var msg = {"Key" : key, "Ro" : responseObj}
