@@ -12,10 +12,10 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
-    <link rel="stylesheet" href="https://aomhcdn.ignite-ga.me/TemplateData/style.css">
-    <link rel="shortcut icon" href="https://aomhcdn.ignite-ga.me/TemplateData/favicon.ico" />
-    <script src="https://aomhcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_1_1/UnityLoader.js"></script>
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/favicon.ico" />
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_1_1/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js" onload="Support.isUnity=true;"></script>
     <script type="text/javascript">
@@ -29,7 +29,7 @@
         }
       };
 
-      var progressLogoBaseURL = "https://aomhcdn.ignite-ga.me/TemplateData/";
+      var progressLogoBaseURL = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/";
       var progressLogoImages = ["LoadingScreen_Nutaku.jpg","progressLogo.Light.png"];
       var progressLogoImage = progressLogoBaseURL + progressLogoImages[Math.floor(Math.random() * progressLogoImages.length)];
       waitForEl(".webgl-content .logo", function() {
@@ -39,7 +39,7 @@
 
       var nutakuUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_1_1/aom-r18.json",
+                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_1_1/aom-r18.json",
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
 
       // ===== Nutaku Login =====
@@ -263,7 +263,7 @@
         itemParams[nutaku.BillingItem.Field.NAME] = jsonObj.ItemName;
 
         if(jsonObj.Icon == "")
-          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://aomhcdn.ignite-ga.me/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+          itemParams[nutaku.BillingItem.Field.IMAGE_URL] = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
         else
           itemParams[nutaku.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
 
@@ -337,7 +337,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://aomhcdn.ignite-ga.me/image/event/202007/bg_mo138.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202007/bg_mo138.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>

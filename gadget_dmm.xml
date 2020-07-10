@@ -13,10 +13,10 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1280">
     <![CDATA[
-    <link rel="stylesheet" href="https://aomhjcdn.ignite-ga.me/TemplateData/style.css">
-    <link rel="shortcut icon" href="https://aomhjcdn.ignite-ga.me/TemplateData/favicon.ico" />
-    <script src="https://aomhjcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/UnityLoader.js"></script>
+    <link rel="stylesheet" href="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/favicon.ico" />
+    <script src="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
+    <script src="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var version = "0.0.6.4";
@@ -33,7 +33,7 @@
         }
       };
 
-      var progressLogoBaseURL = "https://aomhjcdn.ignite-ga.me/TemplateData/";
+      var progressLogoBaseURL = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/";
       var progressLogoImages = ["LoadingScreen_DMM.jpg"];
       var progressLogoImage = progressLogoBaseURL + progressLogoImages[Math.floor(Math.random() * progressLogoImages.length)];
       waitForEl(".webgl-content .logo", function() {
@@ -44,7 +44,7 @@
       var dmmUser = null;
       var gameInstance = null;
 //       var gameInstance = UnityLoader.instantiate("gameContainer",
-//                                                  "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/aom-r18.json",
+//                                                  "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/aom-r18.json",
 //                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
@@ -66,7 +66,7 @@
           if (userType == "developer" || userType == "staff") {
             console.log("[preRegChecking] Developer Entry Point..." );
             gameInstance = UnityLoader.instantiate("gameContainer",
-                                                   "https://aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/aom-r18.json",
+                                                   "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_0_0_6_4/aom-r18.json",
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
             // Send "login/prereg" api to server
@@ -92,24 +92,24 @@
               if (isIOS) {
                 console.log("[preRegChecking] Device Not Supported" );
                 if (isMobile) {
-                  window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/error_sp.html";
+                  window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/error_sp.html";
                 } else {
-                  window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/error_pc.html";
+                  window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/error_pc.html";
                 }
               } else {
                 if (created) {
                   console.log("[preRegChecking] Registered" );
                   if (isMobile) {
-                    window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/thankyou_sp.html?imid="+id;
+                    window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/thankyou_sp.html?imid="+id;
                   } else {
-                    window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/thankyou_pc.html?imid="+id;
+                    window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/thankyou_pc.html?imid="+id;
                   }
                 } else {
                   console.log("[preRegChecking] Player Already Registered" );
                   if (isMobile) {
-                    window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/already_sp.html";
+                    window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/already_sp.html";
                   } else {
-                    window.location = "https://aomhjcdn.ignite-ga.me/pre_reg/already_pc.html";
+                    window.location = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/pre_reg/already_pc.html";
                   }
                 }
               }
@@ -328,7 +328,7 @@
         itemParams[dmm.BillingItem.Field.NAME] = jsonObj.ItemName;
 
         if(jsonObj.Icon == "")
-          itemParams[dmm.BillingItem.Field.IMAGE_URL] = "https://aomhjcdn.ignite-ga.me/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
+          itemParams[dmm.BillingItem.Field.IMAGE_URL] = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/image/purchasable_item_thumbnail/" + jsonObj.Id + ".png";
         else
           itemParams[dmm.BillingItem.Field.IMAGE_URL] = jsonObj.Icon;
 
@@ -403,7 +403,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div id="gameTop" style="background: #FFFFFF url('https://aomhjcdn.ignite-ga.me/image/background02.jpg') no-repeat top center; width: 100%; ">
+    <div id="gameTop" style="background: #FFFFFF url('https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/image/background02.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
