@@ -6,10 +6,10 @@
     <Require feature="dynamic-height"/>
     <Require feature="dmm" /> 
     <Link rel="payment.handler" href="https://aomhj-prd.ignite-ga.me/api/payment/handle" />
-    <Link rel="event.addapp" href="https://aomhj-prd.ignite-ga.me/api/platform/addapp" method="POST" />
-    <Link rel="event.suspendapp" href="https://aomhj-prd.ignite-ga.me/api/platform/suspendapp" method="GET" />
-    <Link rel="event.resumeapp" href="https://aomhj-prd.ignite-ga.me/api/platform/resumeapp" method="GET" />
-    <Link rel="event.removeapp" href="https://aomhj-prd.ignite-ga.me/api/platform/removeapp" method="GET" />
+    <Link rel="event.addapp" href="http://aomhj-prd.ignite-ga.me/api/platform/addapp" method="POST" />
+    <Link rel="event.suspendapp" href="http://aomhj-prd.ignite-ga.me/api/platform/suspendapp" method="GET" />
+    <Link rel="event.resumeapp" href="http://aomhj-prd.ignite-ga.me/api/platform/resumeapp" method="GET" />
+    <Link rel="event.removeapp" href="http://aomhj-prd.ignite-ga.me/api/platform/removeapp" method="GET" />
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1280">
     <![CDATA[
