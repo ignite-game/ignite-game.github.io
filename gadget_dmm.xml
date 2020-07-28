@@ -43,15 +43,15 @@
 
       var dmmUser = null;
       var gameInstance = null;
-//       var gameInstance = UnityLoader.instantiate("gameContainer",
-//                                                  "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_0_2/aom-r18.json",
-//                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+      var gameInstance = UnityLoader.instantiate("gameContainer",
+                                                 "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_0_2/aom-r18.json",
+                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
-        preRegChecking();
         gadgets.window.adjustHeight();
       }
 
+/*
       // ===== User Separation =====
 
       function preRegChecking() {
@@ -117,7 +117,7 @@
           } // END userType
         }); // END queryDmmUser
       }
-
+*/
       // ===== DMM Login =====
 
       function sendLoginRequest() {
