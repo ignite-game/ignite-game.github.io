@@ -42,8 +42,8 @@
       });
 
       var dmmUser = null;
-      var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://aomhjcdn.ignite-ga.me/release/Release_1_0_2/aom-r18.json",
+      var gameInstanceUrl = "https://aomhjcdn.ignite-ga.me/release/Release_1_0_2/aom-r18.json";
+      var gameInstance = UnityLoader.instantiate("gameContainer", gameInstanceUrl,
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
       function init() {
         console.log('gadgets.util.registerOnLoadHandler called');
@@ -64,8 +64,7 @@
 
           if (userType == "developer" || userType == "staff") {
             console.log("[preRegChecking] Developer Entry Point..." );
-            gameInstance = UnityLoader.instantiate("gameContainer",
-                                                   "https://aomhjcdn.ignite-ga.me/release/Release_1_0_2/aom-r18.json",
+            gameInstance = UnityLoader.instantiate("gameContainer", gameInstanceUrl,
                                                    {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
           } else {
             // Send "login/prereg" api to server
