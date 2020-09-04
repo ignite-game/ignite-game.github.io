@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/favicon.ico" />
     <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_3/UnityLoader.js"></script>
+    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_4/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js" onload="Support.isUnity=true;"></script>
     <script type="text/javascript">
@@ -39,7 +39,7 @@
 
       var nutakuUser = null;
       var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_3/aom-r18.json",
+                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_1_4/aom-r18.json",
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
 
       // ===== Nutaku Login =====
@@ -61,7 +61,7 @@
             gameInstance.SendMessage("WebGLResponse", "loginResponse", JSON.stringify(responseObj));
           }, params);
         };
-        var version = "4.1.3";
+        var version = "4.1.4";
         if (nutakuUser != null) {
           var id = nutakuUser.getId();
           var displayName = nutakuUser.getDisplayName();
