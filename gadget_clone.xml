@@ -74,8 +74,11 @@
         if (nutakuUser != null) {
           var id = nutakuUser.getId();
           var displayName = nutakuUser.getDisplayName();
+          var nickname = nutakuUser.getNickname();
+//           var nickname = nutakuUser.getField(opensocial.Person.Field.NICKNAME);
           console.log("id: " + id);
           console.log("displayName: " + displayName);
+          console.log("nickname: " + nickname);
           if (typeof displayName === 'string' || displayName instanceof String) {
             requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
           }
@@ -97,7 +100,9 @@
                 var viewer = item.getData();
                 var id = viewer.getId();
                 var displayName = viewer.getDisplayName();
+                var nickname = viewer.getNickname();
                 console.log("displayName: " + displayName);
+                console.log("nickname: " + nickname);
                 if (typeof displayName === 'string' || displayName instanceof String) {
                   requestURL = requestURL + "?displayName=" + displayName + "&platform=web&version="+version;
                 }
