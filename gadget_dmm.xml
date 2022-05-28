@@ -126,7 +126,7 @@
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
           params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-          params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
+          params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: PUBLIC KEY MARKER
           gadgets.io.makeRequest(requestURL, function(obj) {
             console.log("sendLoginRequest callback");
             var responseObj = {
