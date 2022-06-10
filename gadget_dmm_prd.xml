@@ -77,7 +77,7 @@
             params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
             params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
             params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-            params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: TEMP PUBLIC KEY MARKER
+            params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
             gadgets.io.makeRequest(requestURL, function(obj) {
               console.log("PreReg Login callback:");
               console.log(obj);
@@ -126,7 +126,7 @@
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
           params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-          params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: PUBLIC KEY MARKER
+          params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: PUBLIC KEY MARKER
           gadgets.io.makeRequest(requestURL, function(obj) {
             console.log("sendLoginRequest callback");
             var responseObj = {
@@ -310,7 +310,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({id: 123456789});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: TEMP PUBLIC KEY MARKER
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomhj-prd.ignite-ga.me/api/payment/handle", function(obj) {}, params);
       }
 */
@@ -373,7 +373,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({data: object});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: TEMP PUBLIC KEY MARKER
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomhj-prd.ignite-ga.me/api/route/setByClass?class_name="+key, function(obj) {
           console.log("sendSaveRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
@@ -389,7 +389,7 @@
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({});
         params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
-        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2032";	// !!!: TEMP PUBLIC KEY MARKER
+        params[dmm.io.RequestParameters.OAUTH_SIGNATURE_PUBLICKEY] = "key_2022";	// !!!: TEMP PUBLIC KEY MARKER
         gadgets.io.makeRequest("https://aomhj-prd.ignite-ga.me/api/route/getByClass?class_name="+key, function(obj) {
           console.log("sendGetRequest callback: " + key);
           var responseObj = {"Text": obj.text, "Rc": obj.rc};
