@@ -12,10 +12,8 @@
   </ModulePrefs>
   <Content type="html" view="canvas" preferred_width="1260">
     <![CDATA[
-    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/style.css">
-    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/favicon.ico" />
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_5_0/UnityLoader.js"></script>
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData2/style.css">
+    <link rel="shortcut icon" href="https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData2/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn-publishing.nutaku.net/support_tool/js/supportTool.js" onload="Support.isUnity=true;"></script>
     <script type="text/javascript">
@@ -38,9 +36,7 @@
       });
 
       var nutakuUser = null;
-      var gameInstance = UnityLoader.instantiate("gameContainer",
-                                                 "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/release_sandbox/Release_4_5_0/aom-r18.json",
-                                                 {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
+      var gameInstance = null;
 
       // ===== Nutaku Login =====
 
@@ -340,7 +336,16 @@
     <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202207/bg_mo162_246.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
-          <div id="gameContainer" style="width: 960px; height: 640px"></div>
+          <div id="unity-container" class="unity-desktop">
+            <canvas id="unity-canvas" width=960 height=640></canvas>
+            <div id="unity-loading-bar">
+              <div id="unity-logo"></div>
+              <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+              </div>
+            </div>
+            <div id="unity-warning"> </div>
+          </div>
         </div>
         <div style="width:980px; margin-top: -64px; position: relative;">
           <a id="SupportButton" style="position: absolute; left: 100%;" onclick="Support.ModalInbox();">
@@ -350,6 +355,99 @@
       </div>
     </div>
     <div style="clear: both;"></div>
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var baseUrl = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/";
+      var buildUrl = baseUrl + "release_sandbox/Release_4_5_0b";
+      var loaderUrl = buildUrl + "/aom-r18.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/aom-r18.data.gz",
+        frameworkUrl: buildUrl + "/aom-r18.framework.js.gz",
+        codeUrl: buildUrl + "/aom-r18.wasm.gz",
+        streamingAssetsUrl: baseUrl + "StreamingAssets",
+        companyName: "Ignite Games",
+        productName: "Attack on Moe H",
+        productVersion: "4.5.0",
+        showBanner: unityShowBanner,
+      };
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "640px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          gameInstance = unityInstance;
+          loadingBar.style.display = "none";
+          myCompatbilityCheck();
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
     ]]>
   </Content>
 </Module >
