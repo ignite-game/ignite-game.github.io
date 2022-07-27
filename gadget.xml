@@ -27,12 +27,12 @@
         }
       };
 
-      var progressLogoBaseURL = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData/";
-      var progressLogoImages = ["LoadingScreen_Nutaku.jpg","progressLogo.Light.png"];
+      var progressLogoBaseURL = "https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/TemplateData2/";
+      var progressLogoImages = ["LoadingScreen_Nutaku1.jpg","LoadingScreen_Nutaku2.png"];
       var progressLogoImage = progressLogoBaseURL + progressLogoImages[Math.floor(Math.random() * progressLogoImages.length)];
-      waitForEl(".webgl-content .logo", function() {
-//        console.log("progressLogoImage: "+progressLogoImage);
-        $(".webgl-content .logo").css("background-image", "url('"+progressLogoImage+"')");
+      waitForEl("#unity-logo", function() {
+        console.log("progressLogoImage: "+progressLogoImage);
+        $("#unity-logo").css("background-image", "url('"+progressLogoImage+"')");
       });
 
       var nutakuUser = null;
@@ -333,9 +333,9 @@
     </script>
 
     <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202207/bg_mo162_246.jpg') no-repeat top center; width: 100%; ">
-      <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
-        <div class="webgl-content">
-          <div id="unity-container" class="unity-desktop">
+      <div style="width: 960px; height: 640px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
+        <div class="webgl-content" style="width: 960px; height: 640px;">
+          <div id="unity-container" class="unity-desktop" style="width: 960px; height: 640px; margin-top:-30px;">
             <canvas id="unity-canvas" width=960 height=640></canvas>
             <div id="unity-loading-bar">
               <div id="unity-logo"></div>
