@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/style.css">
     <link rel="shortcut icon" href="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/favicon.ico" />
     <script src="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/TemplateData/UnityProgress.js"></script>
-    <script src="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_2_1/UnityLoader.js"></script>
+    <script src="https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_2_4/UnityLoader.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-      var version = "1.2.1";
+      var version = "1.2.4";
       var isIOS = (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) && !window.MSStream;
       var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
@@ -42,7 +42,7 @@
       });
 
       var dmmUser = null;
-      var gameInstanceUrl = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_2_1/aom-r18.json";
+      var gameInstanceUrl = "https://s3-ap-northeast-1.amazonaws.com/aomhjcdn.ignite-ga.me/release_sandbox/Release_1_2_4/aom-r18.json";
       var gameInstance = UnityLoader.instantiate("gameContainer", gameInstanceUrl,
                                                  {onProgress: UnityProgress, compatibilitycheck: myCompatbilityCheck});
       function init() {
