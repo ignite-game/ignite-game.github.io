@@ -404,7 +404,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202411/bg_mo190.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202411/bg_mo190_224.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content">
           <div id="gameContainer" style="width: 960px; height: 640px"></div>
