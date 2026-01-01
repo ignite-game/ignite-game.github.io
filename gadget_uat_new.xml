@@ -332,7 +332,7 @@
       gadgets.util.registerOnLoadHandler(init);
     </script>
 
-    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202512/bg_mo304_265.jpg') no-repeat top center; width: 100%; ">
+    <div style="background: #000000 url('https://s3-us-west-1.amazonaws.com/aomhcdn.ignite-ga.me/image/event/202601/bg_mo119.jpg') no-repeat top center; width: 100%; ">
       <div style="width: 960px; height: 640px; padding-top: 123px; padding-bottom: 182px; display: block; margin-right: auto; margin-left: auto;">
         <div class="webgl-content" style="width: 960px; height: 640px;">
           <div id="unity-container" class="unity-desktop" style="width: 960px; height: 640px; margin-top:-30px;">
